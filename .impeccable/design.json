@@ -1,0 +1,442 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-29T04:26:39+00:00",
+  "title": "Design System: El Bocadillo",
+  "extensions": {
+    "colorMeta": {
+      "ground": {
+        "role": "neutral",
+        "displayName": "Noche de Local",
+        "canonical": "oklch(15.5% 0.004 85)",
+        "tonalRamp": [
+          "#0c0b09",
+          "#252422",
+          "#41403d",
+          "#5f5d5b",
+          "#7e7d7a",
+          "#a09e9b",
+          "#c5c4c1",
+          "#f0eeeb"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Mostrador",
+        "canonical": "oklch(20.1% 0.007 78)",
+        "tonalRamp": [
+          "#0d0b08",
+          "#262420",
+          "#423f3c",
+          "#605d59",
+          "#7f7d79",
+          "#a19e9a",
+          "#c6c4bf",
+          "#f1eeea"
+        ]
+      },
+      "raised": {
+        "role": "neutral",
+        "displayName": "Mostrador Alto",
+        "canonical": "oklch(24.9% 0.010 81)",
+        "tonalRamp": [
+          "#0d0b07",
+          "#27241f",
+          "#433f3a",
+          "#615d57",
+          "#807d77",
+          "#a29e97",
+          "#c7c3bd",
+          "#f2eee7"
+        ]
+      },
+      "edge": {
+        "role": "neutral",
+        "displayName": "Canto",
+        "canonical": "oklch(33.2% 0.015 80)",
+        "tonalRamp": [
+          "#0f0a05",
+          "#28231c",
+          "#443f37",
+          "#625d54",
+          "#827c73",
+          "#a49e94",
+          "#c9c3b9",
+          "#f4eee3"
+        ]
+      },
+      "text": {
+        "role": "neutral",
+        "displayName": "Crema de Luz",
+        "canonical": "oklch(95.1% 0.016 83)",
+        "tonalRamp": [
+          "#0e0b04",
+          "#28231b",
+          "#443f36",
+          "#625d54",
+          "#827d73",
+          "#a39e93",
+          "#c9c3b9",
+          "#f4eee3"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Gris Cálido",
+        "canonical": "oklch(74.1% 0.028 82)",
+        "tonalRamp": [
+          "#110a01",
+          "#2b2314",
+          "#473f2f",
+          "#655c4c",
+          "#867c6b",
+          "#a79d8b",
+          "#cdc3b0",
+          "#f8edda"
+        ]
+      },
+      "gold": {
+        "role": "primary",
+        "displayName": "Dorado Bocadillo",
+        "canonical": "oklch(77.4% 0.129 84)",
+        "tonalRamp": [
+          "#200000",
+          "#401800",
+          "#5f3600",
+          "#7f5500",
+          "#a17500",
+          "#c4972c",
+          "#ebbd58",
+          "#ffe88d"
+        ]
+      },
+      "gold-strong": {
+        "role": "primary",
+        "displayName": "Dorado Encendido",
+        "canonical": "oklch(83.2% 0.127 86)",
+        "tonalRamp": [
+          "#1f0000",
+          "#3e1900",
+          "#5c3700",
+          "#7d5600",
+          "#9e7600",
+          "#c19830",
+          "#e8be5b",
+          "#ffe98d"
+        ]
+      },
+      "on-gold": {
+        "role": "primary",
+        "displayName": "Tinta sobre Dorado",
+        "canonical": "oklch(18.6% 0.017 79)",
+        "tonalRamp": [
+          "#0f0a04",
+          "#29231b",
+          "#453f36",
+          "#635d53",
+          "#837c72",
+          "#a49d93",
+          "#cac3b8",
+          "#f5ede2"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Papel Térmico",
+        "canonical": "oklch(95.8% 0.015 90)",
+        "tonalRamp": [
+          "#0e0b05",
+          "#27241c",
+          "#434037",
+          "#615d54",
+          "#817d73",
+          "#a29e94",
+          "#c8c4b9",
+          "#f2eee3"
+        ]
+      },
+      "paper-ink": {
+        "role": "neutral",
+        "displayName": "Tinta Térmica",
+        "canonical": "oklch(21.9% 0.008 85)",
+        "tonalRamp": [
+          "#0d0b07",
+          "#262420",
+          "#423f3b",
+          "#605d58",
+          "#7f7d78",
+          "#a19e99",
+          "#c6c4be",
+          "#f1eee8"
+        ]
+      },
+      "paper-muted": {
+        "role": "neutral",
+        "displayName": "Tinta Gastada",
+        "canonical": "oklch(46.6% 0.020 85)",
+        "tonalRamp": [
+          "#0f0a03",
+          "#292319",
+          "#453f34",
+          "#635d51",
+          "#837d70",
+          "#a49e90",
+          "#cac3b6",
+          "#f5eee0"
+        ]
+      },
+      "paper-mark": {
+        "role": "tertiary",
+        "displayName": "Marcador",
+        "canonical": "oklch(92.3% 0.096 89)",
+        "tonalRamp": [
+          "#1b0500",
+          "#361f00",
+          "#543c00",
+          "#735a04",
+          "#947a31",
+          "#b69c54",
+          "#ddc179",
+          "#ffeca3"
+        ]
+      },
+      "danger": {
+        "role": "error",
+        "displayName": "Alerta Coral",
+        "canonical": "oklch(75.7% 0.146 31)",
+        "tonalRamp": [
+          "#2d0000",
+          "#570000",
+          "#7b0900",
+          "#9f3323",
+          "#c55643",
+          "#eb7864",
+          "#ff9e88",
+          "#ffd0bd"
+        ]
+      },
+      "open": {
+        "role": "success",
+        "displayName": "Verde Abierto",
+        "canonical": "oklch(82.9% 0.105 143)",
+        "tonalRamp": [
+          "#001300",
+          "#002f00",
+          "#154d13",
+          "#366c33",
+          "#568d52",
+          "#77af72",
+          "#9cd697",
+          "#c6ffc0"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Solo el wordmark El Bocadillo, en dorado; 3.75rem desde 640px."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Nombres de categoría (3rem desde 640px) y número de comanda enviada."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Nombres de burgers en las filas del menú."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Descripciones, ayudas y avisos."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Leyendas, chips, botones y precios tabulares."
+      },
+      "ticket": {
+        "displayName": "Ticket",
+        "purpose": "Todo el texto impreso sobre papel térmico; nunca fuera del papel."
+      }
+    },
+    "shadows": [
+      {
+        "name": "papel-flotante",
+        "value": "0 -12px 32px rgb(0 0 0 / 0.45)",
+        "purpose": "Solo la tira de comanda fija en mobile, papel flotando sobre la noche."
+      },
+      {
+        "name": "velo-de-hoja",
+        "value": "rgb(5 4 3 / 0.72)",
+        "purpose": "Backdrop de toda hoja abierta (no es box-shadow)."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out-expo",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Única curva del sistema."
+      },
+      {
+        "name": "print",
+        "value": "520ms ease-out-expo; clip-path inset(0 0 100% 0) a inset(0) con 10px de avance",
+        "purpose": "Cada ítem nuevo se imprime en el ticket."
+      },
+      {
+        "name": "feed",
+        "value": "420ms ease-out-expo; translateY 0, -8px, 0",
+        "purpose": "La tira de comanda avanza con cada agregado."
+      },
+      {
+        "name": "sheet",
+        "value": "380ms ease-out-expo (velo 300ms ease)",
+        "purpose": "Hojas que suben desde abajo."
+      },
+      {
+        "name": "mark-fade",
+        "value": "700ms",
+        "purpose": "Transición del marcador al cambiar de línea."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "1ms",
+        "purpose": "Con prefers-reduced-motion, toda animación y transición."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      },
+      {
+        "name": "xl",
+        "value": "1280px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Botón primario",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Acción dorada en píldora; si lleva precio, el precio va a la derecha.",
+      "html": "<button class=\"ds-btn-primary\"><span>Agregar</span><span class=\"ds-tab\">$12.500</span></button>",
+      "css": ".ds-btn-primary{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:48px;min-width:260px;padding:0 20px;border:0;border-radius:9999px;background:var(--color-gold,#d6a842);color:var(--color-on-gold,#17120a);font:600 1rem/1.5 var(--font-sans,Archivo,system-ui,sans-serif);cursor:pointer;transition:background-color .15s,transform .15s}.ds-btn-primary:hover{background:var(--color-gold-strong,#ecc25f)}.ds-btn-primary:active{transform:scale(.98)}.ds-btn-primary:focus-visible{outline:2px solid var(--color-gold);outline-offset:3px;}.ds-tab{font-variant-numeric:tabular-nums}"
+    },
+    {
+      "name": "Enviar pedido",
+      "kind": "button",
+      "refersTo": "button-send",
+      "description": "Acción final de la comanda, 56px, con ícono de WhatsApp y total.",
+      "html": "<button class=\"ds-btn-send\"><svg viewBox=\"0 0 24 24\" width=\"24\" height=\"24\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45c6.55 0 11.89-5.34 11.89-11.89S18.6 0 12.05 0zm0 21.79a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88s9.88 4.43 9.88 9.88-4.43 9.89-9.89 9.89z\"/></svg>Enviar pedido · <span class=\"ds-tab\">$24.000</span></button>",
+      "css": ".ds-btn-send{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;max-width:380px;min-height:56px;padding:0 24px;border:0;border-radius:9999px;background:var(--color-gold,#d6a842);color:var(--color-on-gold,#17120a);font:600 1.125rem/1.5 var(--font-sans,Archivo,system-ui,sans-serif);cursor:pointer;transition:background-color .15s,transform .15s}.ds-btn-send:hover{background:var(--color-gold-strong,#ecc25f)}.ds-btn-send:active{transform:scale(.98)}.ds-btn-send:focus-visible{outline:2px solid var(--color-gold);outline-offset:3px;}.ds-tab{font-variant-numeric:tabular-nums}"
+    },
+    {
+      "name": "Botón secundario",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Píldora raised para acciones de apoyo (copiar el pedido).",
+      "html": "<button class=\"ds-btn-secondary\">Copiar el pedido</button>",
+      "css": ".ds-btn-secondary{min-height:48px;padding:0 20px;border:0;border-radius:9999px;background:var(--color-raised,#24211c);color:var(--color-text,#f4eee3);font:600 1rem/1.5 var(--font-sans,Archivo,system-ui,sans-serif);cursor:pointer;transition:background-color .15s,transform .15s}.ds-btn-secondary:hover{background:var(--color-edge,#3a352d)}.ds-btn-secondary:active{transform:scale(.98)}.ds-btn-secondary:focus-visible{outline:2px solid var(--color-gold);outline-offset:3px;}"
+    },
+    {
+      "name": "Barra de categorías",
+      "kind": "nav",
+      "refersTo": "chip-category",
+      "description": "Chips en píldora, el activo en dorado.",
+      "html": "<nav class=\"ds-cats\"><a href=\"#\" class=\"ds-cat\" aria-current=\"true\">Burgers</a><a href=\"#\" class=\"ds-cat\">Papas</a><a href=\"#\" class=\"ds-cat\">Bebidas</a></nav>",
+      "css": ".ds-cats{display:flex;gap:8px;padding:12px 16px;background:var(--color-ground,#0d0c0a)}.ds-cat{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:9999px;background:var(--color-surface,#181613);color:var(--color-muted,#b4aa98);font:600 1rem/1.5 var(--font-sans,Archivo,system-ui,sans-serif);text-decoration:none;transition:color .15s}.ds-cat:hover{color:var(--color-text,#f4eee3)}.ds-cat[aria-current]{background:var(--color-gold,#d6a842);color:var(--color-on-gold,#17120a)}.ds-cat:focus-visible{outline:2px solid var(--color-gold);outline-offset:3px;}"
+    },
+    {
+      "name": "Chip sin ingrediente",
+      "kind": "chip",
+      "refersTo": "chip-removed",
+      "description": "Al quitar un ingrediente el chip se invierte y se tacha.",
+      "html": "<div class=\"ds-chips\"><label class=\"ds-chip\">Cebolla</label><label class=\"ds-chip ds-chip-on\">Sin pepinos</label></div>",
+      "css": ".ds-chips{display:flex;gap:8px;flex-wrap:wrap}.ds-chip{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:9999px;background:var(--color-raised,#24211c);color:var(--color-text,#f4eee3);font:400 .875rem/1.5 var(--font-sans,Archivo,system-ui,sans-serif);cursor:pointer;transition:background-color .15s}.ds-chip:hover{background:var(--color-edge,#3a352d)}.ds-chip-on,.ds-chip-on:hover{background:var(--color-text,#f4eee3);color:var(--color-ground,#0d0c0a);text-decoration:line-through;text-decoration-thickness:2px}"
+    },
+    {
+      "name": "Campo",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Relleno raised sin borde; foco dorado, error coral.",
+      "html": "<label class=\"ds-field\"><span class=\"ds-lbl\">Tu nombre</span><input class=\"ds-input\" placeholder=\"Ej: Juan\"></label>",
+      "css": ".ds-field{display:block;max-width:340px}.ds-lbl{display:block;margin-bottom:6px;color:var(--color-text,#f4eee3);font:600 1rem/1.5 var(--font-sans,Archivo,system-ui,sans-serif)}.ds-input{width:100%;min-height:48px;padding:12px 16px;border:0;border-radius:10px;background:var(--color-raised,#24211c);color:var(--color-text,#f4eee3);caret-color:var(--color-gold,#d6a842);font:400 1rem/1.5 var(--font-sans,Archivo,system-ui,sans-serif)}.ds-input::placeholder{color:rgb(180 170 152/.7)}.ds-input:focus{outline:2px solid var(--color-gold,#d6a842)}.ds-input[aria-invalid]{outline:2px solid var(--color-danger,#ff8a75)}"
+    },
+    {
+      "name": "Fila del menú",
+      "kind": "card",
+      "refersTo": "menu-row",
+      "description": "Producto: nombre en Gloock, descripción, precio dorado tabular y + circular.",
+      "html": "<button class=\"ds-row\"><span class=\"ds-row-txt\"><span class=\"ds-row-top\"><span class=\"ds-row-name\">Onion</span><span class=\"ds-row-price\"><span class=\"ds-row-from\">desde </span>$10.700</span></span><span class=\"ds-row-bottom\"><span class=\"ds-row-desc\">Medallón, cheddar, cebolla caramelizada, panceta y salsa de la casa.</span><span class=\"ds-plus\" aria-hidden=\"true\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"><path d=\"M5 12h14M12 5v14\"/></svg></span></span></span></button>",
+      "css": ".ds-row{display:flex;width:100%;max-width:440px;padding:20px 0;border:0;border-bottom:1px solid var(--color-edge,#3a352d);background:transparent;color:var(--color-text,#f4eee3);text-align:left;cursor:pointer}.ds-row:active{background:var(--color-surface,#181613)}.ds-row:focus-visible{outline:2px solid var(--color-gold,#d6a842);outline-offset:3px}.ds-row-txt{flex:1;min-width:0}.ds-row-top{display:flex;align-items:baseline;justify-content:space-between;gap:12px}.ds-row-name{font:400 1.6rem/1.25 var(--font-display,Gloock,Georgia,serif);transition:color .15s}.ds-row:hover .ds-row-name{color:var(--color-gold,#d6a842)}.ds-row-price{white-space:nowrap;color:var(--color-gold,#d6a842);font:600 1rem/1.5 var(--font-sans,Archivo,system-ui,sans-serif);font-variant-numeric:tabular-nums}.ds-row-from{font-weight:400;font-size:.875rem;color:var(--color-muted,#b4aa98)}.ds-row-bottom{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-top:4px}.ds-row-desc{color:var(--color-muted,#b4aa98);font:400 .95rem/1.5 var(--font-sans,Archivo,system-ui,sans-serif)}.ds-plus{display:grid;place-items:center;width:44px;height:44px;flex-shrink:0;border-radius:9999px;background:var(--color-raised,#24211c);color:var(--color-gold,#d6a842)}.ds-row:hover .ds-plus{background:var(--color-gold,#d6a842);color:var(--color-on-gold,#17120a)}"
+    },
+    {
+      "name": "Comanda térmica",
+      "kind": "custom",
+      "refersTo": "ticket",
+      "description": "Componente firma: papel con borde dentado, mono de comandera y la última línea sobre el marcador.",
+      "html": "<figure class=\"ds-paper\"><div class=\"ds-cut\"><p>COMANDA #A1B2</p><p>Retiro en el local</p></div><div class=\"ds-cut\"><div class=\"ds-line\"><p><strong>1x Kratos (doble)</strong></p><p>  + cheddar extra</p></div><div class=\"ds-line ds-mark\"><p><strong>2x Papas</strong></p></div></div><div class=\"ds-cut\"><p><strong>Total estimado: $24.000</strong></p></div></figure>",
+      "css": ".ds-paper{--tooth:7px;max-width:340px;margin:0;padding:28px 20px 32px;background:var(--color-paper,#f6f3ea);color:var(--color-paper-ink,#1c1a16);font:400 12.5px/1.6 var(--font-ticket,'Martian Mono',ui-monospace,monospace);font-stretch:88%;-webkit-mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom/calc(var(--tooth)*2) 51% repeat-x,conic-gradient(from 135deg at top,#0000,#000 1deg 89deg,#0000 90deg) top/calc(var(--tooth)*2) 51% repeat-x;mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom/calc(var(--tooth)*2) 51% repeat-x,conic-gradient(from 135deg at top,#0000,#000 1deg 89deg,#0000 90deg) top/calc(var(--tooth)*2) 51% repeat-x}.ds-paper p{margin:0;white-space:pre-wrap}.ds-cut{padding:12px 0;border-bottom:1px dashed rgb(28 26 22/.35)}.ds-cut:first-child{padding-top:0}.ds-cut:last-child{border:0;padding-bottom:0}.ds-line{margin:0 -8px;padding:4px 8px;border-radius:2px;animation:ds-print 520ms cubic-bezier(.16,1,.3,1) both}.ds-mark{background:var(--color-paper-mark,#ffe39a)}@keyframes ds-print{from{clip-path:inset(0 0 100% 0);transform:translateY(-10px)}to{clip-path:inset(0);transform:none}}@media (prefers-reduced-motion:reduce){.ds-line{animation-duration:1ms}}"
+    }
+  ],
+  "narrative": {
+    "northStar": "La comanda térmica del mostrador",
+    "overview": "El sistema es un local de noche: un suelo negro cálido, superficies que suben un paso de luz por capa, y un dorado de marca que aparece donde importa (el nombre del local, los precios, la acción y lo que elegiste). Sobre esa noche, un único material distinto: el papel térmico de la comandera, crema con borde dentado y tinta negra, que es el carrito y es literalmente el texto que le llega al local por WhatsApp.\n\nLa densidad es de mostrador: filas táctiles grandes, nombres de burgers en serif de alto contraste, descripciones cortas en gris cálido y precios tabulares. Nada decorativo compite con el pedido. El movimiento tiene una sola gramática, la de la impresora: el papel avanza, la línea nueva se imprime de arriba hacia abajo y queda resaltada como con un marcador.\n\nSe rechaza explícitamente el carrito-cajón genérico de app de delivery con contador rojo: el estado del pedido se ve siempre como papel, nunca como badge.",
+    "keyCharacteristics": [
+      "Modo oscuro único (`color-scheme: dark`), pensado para pantallas con brillo bajo de noche.",
+      "Dos materiales: noche (ground/surface/raised) y papel térmico (paper).",
+      "Dorado como voz de marca, precio, acción primaria y selección.",
+      "Gloock para marca y nombres; Archivo para toda la UI; Martian Mono solo sobre papel.",
+      "Controles de 44px o más; acciones principales en píldora."
+    ],
+    "rules": [
+      {
+        "name": "The Dorado Con Motivo Rule",
+        "body": "El dorado marca marca, precio, acción o elección; nunca fondos de sección, bordes decorativos ni texto corrido.",
+        "section": "colors"
+      },
+      {
+        "name": "The Dos Materiales Rule",
+        "body": "Toda superficie es noche o papel. Los tokens `paper-*` solo viven sobre `paper`, y los tokens de noche nunca se usan dentro del ticket.",
+        "section": "colors"
+      },
+      {
+        "name": "The Mono Sobre Papel Rule",
+        "body": "Martian Mono aparece solo sobre papel térmico. Fuera del ticket, ningún texto se escribe en mono.",
+        "section": "typography"
+      },
+      {
+        "name": "The Serif Para Nombres Rule",
+        "body": "Gloock lleva nombres (del local, de categorías, de burgers, de hojas), siempre en peso 400 y en caja normal; nunca botones, etiquetas ni párrafos.",
+        "section": "typography"
+      },
+      {
+        "name": "The Un Paso De Luz Rule",
+        "body": "Para separar o mostrar hover, subí un escalón tonal. No agregues sombras ni bordes a las superficies de noche.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do mostrar el estado del pedido como papel térmico (paper con borde dentado), nunca como contador.",
+      "Do escribir precios y cantidades en cifras tabulares; en el menú van en dorado y 600.",
+      "Do separar superficies de noche subiendo un escalón tonal (ground, surface, raised, edge).",
+      "Do mantener todo control táctil en 44px o más (48px en campos y acciones de hoja, 56px en enviar).",
+      "Do usar `cubic-bezier(0.16, 1, 0.3, 1)` para todo movimiento y respetar `prefers-reduced-motion`.",
+      "Do usar el contorno dorado de 2px como foco en todo elemento interactivo."
+    ],
+    "donts": [
+      "Don't usar un carrito-cajón con badge rojo de contador.",
+      "Don't usar Martian Mono fuera del papel térmico ni tokens `paper-*` sobre la noche.",
+      "Don't redondear el papel: sus bordes son dientes de 7px o cortes punteados.",
+      "Don't agregar sombras a superficies de noche; la única sombra es la del papel flotante.",
+      "Don't usar el dorado como fondo de sección, borde decorativo o texto corrido.",
+      "Don't poner Gloock en botones, etiquetas o párrafos, ni en otro peso que 400."
+    ]
+  }
+}

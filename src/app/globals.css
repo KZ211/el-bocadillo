@@ -1,0 +1,201 @@
+@import "tailwindcss";
+
+/*
+ * El Bocadillo — comanda térmica.
+ * Noche de local (negro cálido), dorado de marca, papel térmico para el ticket.
+ */
+@theme {
+  --color-ground: #0d0c0a;
+  --color-surface: #181613;
+  --color-raised: #24211c;
+  --color-edge: #3a352d;
+  --color-text: #f4eee3;
+  --color-muted: #b4aa98;
+  --color-gold: #d6a842;
+  --color-gold-strong: #ecc25f;
+  --color-on-gold: #17120a;
+  --color-paper: #f6f3ea;
+  --color-paper-ink: #1c1a16;
+  --color-paper-muted: #5f594d;
+  --color-paper-mark: #ffe39a;
+  --color-danger: #ff8a75;
+  --color-open: #9fd99a;
+
+  --font-display: var(--font-gloock), Georgia, serif;
+  --font-sans: var(--font-archivo), system-ui, sans-serif;
+  --font-ticket: var(--font-martian), ui-monospace, monospace; /* taste-skill-ignore: tipografía de comandera, solo dentro del ticket */
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-print: print 520ms var(--ease-out-expo) both;
+  --animate-feed: feed 420ms var(--ease-out-expo);
+
+  @keyframes print {
+    from {
+      clip-path: inset(0 0 100% 0);
+      transform: translateY(-10px);
+    }
+    to {
+      clip-path: inset(0 0 0 0);
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes paper-feed {
+    from {
+      transform: translateY(-18px);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes feed {
+    0% {
+      transform: translateY(0);
+    }
+    35% {
+      transform: translateY(-8px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+}
+
+html {
+  background: var(--color-ground);
+  color: var(--color-text);
+  color-scheme: dark;
+  -webkit-tap-highlight-color: transparent;
+  scroll-padding-top: 5.5rem;
+}
+
+html:has(dialog[open]) {
+  overflow: hidden;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.5;
+  overscroll-behavior-y: none;
+}
+
+::selection {
+  background: var(--color-gold);
+  color: var(--color-on-gold);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+}
+
+input,
+textarea {
+  caret-color: var(--color-gold);
+  /* Que el botón fijo de enviar no tape el campo con error. */
+  scroll-margin-block: 6rem 7rem;
+}
+
+* {
+  scrollbar-color: var(--color-edge) transparent;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Papel térmico: borde dentado arriba y abajo, como el corte de la comandera.
+   Los conic-gradient son máscara de recorte, no relleno. taste-skill-ignore */
+.paper {
+  --tooth: 7px;
+  background: var(--color-paper);
+  color: var(--color-paper-ink);
+  -webkit-mask:
+    conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) bottom / calc(var(--tooth) * 2) 51% repeat-x, /* taste-skill-ignore: máscara */
+    conic-gradient(from 135deg at top, #0000, #000 1deg 89deg, #0000 90deg) top / calc(var(--tooth) * 2) 51% repeat-x; /* taste-skill-ignore: máscara */
+  mask:
+    conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) bottom / calc(var(--tooth) * 2) 51% repeat-x, /* taste-skill-ignore: máscara */
+    conic-gradient(from 135deg at top, #0000, #000 1deg 89deg, #0000 90deg) top / calc(var(--tooth) * 2) 51% repeat-x; /* taste-skill-ignore: máscara */
+}
+
+.paper-top {
+  --tooth: 7px;
+  -webkit-mask: conic-gradient(from 135deg at top, #0000, #000 1deg 89deg, #0000 90deg) top / calc(var(--tooth) * 2) 100% repeat-x; /* taste-skill-ignore: máscara */
+  mask: conic-gradient(from 135deg at top, #0000, #000 1deg 89deg, #0000 90deg) top / calc(var(--tooth) * 2) 100% repeat-x; /* taste-skill-ignore: máscara */
+}
+
+/* Hojas (dialog nativo): suben desde abajo en mobile. */
+dialog.sheet {
+  margin: auto auto 0;
+  width: 100%;
+  max-width: 100%;
+  max-height: 92dvh;
+  padding: 0;
+  border: 0;
+  background: var(--color-surface);
+  color: var(--color-text);
+  border-radius: 18px 18px 0 0;
+  overflow: clip;
+  transition:
+    transform 380ms var(--ease-out-expo),
+    overlay 380ms allow-discrete,
+    display 380ms allow-discrete;
+  transform: translateY(0);
+}
+
+dialog.sheet:not([open]) {
+  transform: translateY(100%);
+}
+
+@starting-style {
+  dialog.sheet[open] {
+    transform: translateY(100%);
+  }
+}
+
+dialog.sheet.full {
+  max-height: 100dvh;
+  height: 100dvh;
+  border-radius: 0;
+}
+
+dialog.sheet::backdrop {
+  background: rgb(5 4 3 / 0.72);
+  transition:
+    opacity 300ms ease,
+    overlay 300ms allow-discrete,
+    display 300ms allow-discrete;
+  opacity: 1;
+}
+
+dialog.sheet:not([open])::backdrop {
+  opacity: 0;
+}
+
+@starting-style {
+  dialog.sheet[open]::backdrop {
+    opacity: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  dialog.sheet:not(.full) {
+    margin: auto;
+    max-width: 34rem;
+    max-height: 88dvh;
+    border-radius: 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after,
+  dialog.sheet,
+  dialog.sheet::backdrop {
+    animation-duration: 1ms !important;
+    transition-duration: 1ms !important;
+  }
+}

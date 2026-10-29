@@ -1,0 +1,218 @@
+{
+  ".impeccable/design.json": {
+    "mtime": 1793248050.3807323,
+    "seen": 1793248195.883353,
+    "ast_hash": "6197dff788cb63b36238d9c7b26d6b6c",
+    "semantic_hash": "6197dff788cb63b36238d9c7b26d6b6c"
+  },
+  "eslint.config.mjs": {
+    "mtime": 1793246269.5440094,
+    "seen": 1793248195.8833642,
+    "ast_hash": "dfa1f5f6a7037bf39dc510f30b180002",
+    "semantic_hash": "dfa1f5f6a7037bf39dc510f30b180002"
+  },
+  "next.config.ts": {
+    "mtime": 1793246269.5472686,
+    "seen": 1793248195.883368,
+    "ast_hash": "59ace8843cd0f04a4328b2189aead87b",
+    "semantic_hash": "59ace8843cd0f04a4328b2189aead87b"
+  },
+  "package.json": {
+    "mtime": 1793247432.2108507,
+    "seen": 1793248195.883371,
+    "ast_hash": "e363212806a6a000b3f73acfe8c306a2",
+    "semantic_hash": "e363212806a6a000b3f73acfe8c306a2"
+  },
+  "pnpm-workspace.yaml": {
+    "mtime": 1793246270.117235,
+    "seen": 1793248195.883372,
+    "ast_hash": "bb50e932d44a2dde6b7fe1bbea2c98c5",
+    "semantic_hash": "bb50e932d44a2dde6b7fe1bbea2c98c5"
+  },
+  "src/app/layout.tsx": {
+    "mtime": 1793247754.905791,
+    "seen": 1793248195.883374,
+    "ast_hash": "7ea77f1b8d9b4dbde27f53d273baac9c",
+    "semantic_hash": "7ea77f1b8d9b4dbde27f53d273baac9c"
+  },
+  "src/app/page.tsx": {
+    "mtime": 1793247443.1088603,
+    "seen": 1793248195.8833761,
+    "ast_hash": "e25b0375ac7c498ab9d78c008925e200",
+    "semantic_hash": "e25b0375ac7c498ab9d78c008925e200"
+  },
+  "src/components/checkout-form.tsx": {
+    "mtime": 1793248072.614769,
+    "seen": 1793248195.8833768,
+    "ast_hash": "1792837db95013378146ea6e0717ce54",
+    "semantic_hash": "1792837db95013378146ea6e0717ce54"
+  },
+  "src/components/comanda-panel.tsx": {
+    "mtime": 1793247976.2356107,
+    "seen": 1793248195.883379,
+    "ast_hash": "cb88aa6cbf881338de2d0bd891ec5a30",
+    "semantic_hash": "cb88aa6cbf881338de2d0bd891ec5a30"
+  },
+  "src/components/icons.tsx": {
+    "mtime": 1793247463.2269337,
+    "seen": 1793248195.88338,
+    "ast_hash": "3d1a53bbf37797e762d741d2d09517b0",
+    "semantic_hash": "3d1a53bbf37797e762d741d2d09517b0"
+  },
+  "src/components/order-app.tsx": {
+    "mtime": 1793247986.2582023,
+    "seen": 1793248195.883382,
+    "ast_hash": "1ba1967c47f6dff3a56ba89d3184d208",
+    "semantic_hash": "1ba1967c47f6dff3a56ba89d3184d208"
+  },
+  "src/components/printer-mouth.tsx": {
+    "mtime": 1793248012.4209056,
+    "seen": 1793248195.883384,
+    "ast_hash": "6f76f61d9a216d9102dd0f4b87257e78",
+    "semantic_hash": "6f76f61d9a216d9102dd0f4b87257e78"
+  },
+  "src/components/product-sheet.tsx": {
+    "mtime": 1793247976.2350767,
+    "seen": 1793248195.8833852,
+    "ast_hash": "3075d48447995d2e929b3d24254b783b",
+    "semantic_hash": "3075d48447995d2e929b3d24254b783b"
+  },
+  "src/components/sheet.tsx": {
+    "mtime": 1793247976.2361019,
+    "seen": 1793248195.8833861,
+    "ast_hash": "fbee1e713d814138c37896e868fa624d",
+    "semantic_hash": "fbee1e713d814138c37896e868fa624d"
+  },
+  "src/components/ticket.tsx": {
+    "mtime": 1793248012.428597,
+    "seen": 1793248195.8833878,
+    "ast_hash": "359176de495d91a4e9367e192f31c5e8",
+    "semantic_hash": "359176de495d91a4e9367e192f31c5e8"
+  },
+  "src/data/menu.ts": {
+    "mtime": 1793247281.3413124,
+    "seen": 1793248195.883389,
+    "ast_hash": "a2fcadfd950bf54f8e3224acf48e7003",
+    "semantic_hash": "a2fcadfd950bf54f8e3224acf48e7003"
+  },
+  "src/data/store.ts": {
+    "mtime": 1793247378.4532568,
+    "seen": 1793248195.883391,
+    "ast_hash": "d88b789a9ff2900807590fcee1606adb",
+    "semantic_hash": "d88b789a9ff2900807590fcee1606adb"
+  },
+  "src/lib/order/hours.ts": {
+    "mtime": 1793247331.4689708,
+    "seen": 1793248195.883392,
+    "ast_hash": "971b97013ec25e670f643f684260ffbc",
+    "semantic_hash": "971b97013ec25e670f643f684260ffbc"
+  },
+  "src/lib/order/message.ts": {
+    "mtime": 1793247313.0490391,
+    "seen": 1793248195.883393,
+    "ast_hash": "31b96f9d753f06e21ad6ee98d69d68d0",
+    "semantic_hash": "31b96f9d753f06e21ad6ee98d69d68d0"
+  },
+  "src/lib/order/order.test.ts": {
+    "mtime": 1793247356.8883088,
+    "seen": 1793248195.883395,
+    "ast_hash": "c4666017c44139902d7be0722ee22eb7",
+    "semantic_hash": "c4666017c44139902d7be0722ee22eb7"
+  },
+  "src/lib/order/pricing.ts": {
+    "mtime": 1793247294.2341356,
+    "seen": 1793248195.8833961,
+    "ast_hash": "04fc00189fbfa5e1a8b7df82d96712cb",
+    "semantic_hash": "04fc00189fbfa5e1a8b7df82d96712cb"
+  },
+  "src/lib/order/types.ts": {
+    "mtime": 1793247294.031608,
+    "seen": 1793248195.883397,
+    "ast_hash": "2dfbff623f2ac7fb28ca9f1997585082",
+    "semantic_hash": "2dfbff623f2ac7fb28ca9f1997585082"
+  },
+  "src/lib/order/validate.ts": {
+    "mtime": 1793247331.646019,
+    "seen": 1793248195.8834019,
+    "ast_hash": "a23506cb7fa24d4a6942de5ef4b77a47",
+    "semantic_hash": "a23506cb7fa24d4a6942de5ef4b77a47"
+  },
+  "tsconfig.json": {
+    "mtime": 1793246269.54838,
+    "seen": 1793248195.883403,
+    "ast_hash": "ee17fd1c97c735e9f3564e3f5251f125",
+    "semantic_hash": "ee17fd1c97c735e9f3564e3f5251f125"
+  },
+  "vitest.config.ts": {
+    "mtime": 1793247357.214732,
+    "seen": 1793248195.883405,
+    "ast_hash": "b5b57503899e026e3667c83f00e4e4a0",
+    "semantic_hash": "b5b57503899e026e3667c83f00e4e4a0"
+  },
+  ".impeccable/surfaces/src-app-page-tsx.md": {
+    "mtime": 1793247949.8255854,
+    "seen": 1793248195.883407,
+    "ast_hash": "e0d74ae3c58ca0c14eca7557e969c08e",
+    "semantic_hash": "e0d74ae3c58ca0c14eca7557e969c08e"
+  },
+  "AGENTS.md": {
+    "mtime": 1793246292.5493004,
+    "seen": 1793248195.8834078,
+    "ast_hash": "c98dbebb744eadc1acc4b9f58bfe0f42",
+    "semantic_hash": "c98dbebb744eadc1acc4b9f58bfe0f42"
+  },
+  "CLAUDE.md": {
+    "mtime": 1793247846.3796985,
+    "seen": 1793248195.88341,
+    "ast_hash": "317bb4ee54370a83e92b3600fe43d371",
+    "semantic_hash": "317bb4ee54370a83e92b3600fe43d371"
+  },
+  "DESIGN.md": {
+    "mtime": 1793248039.7079568,
+    "seen": 1793248195.883412,
+    "ast_hash": "68bd3d1a0265c1a19d8ee5a632a02a3e",
+    "semantic_hash": "68bd3d1a0265c1a19d8ee5a632a02a3e"
+  },
+  "PRODUCT.md": {
+    "mtime": 1793246318.272848,
+    "seen": 1793248195.883413,
+    "ast_hash": "9d54c8ebe5bd360f3d7f97f63a395427",
+    "semantic_hash": "9d54c8ebe5bd360f3d7f97f63a395427"
+  },
+  "README.md": {
+    "mtime": 1793247846.3764088,
+    "seen": 1793248195.883415,
+    "ast_hash": "87e278c057df706d285b0378af19b23c",
+    "semantic_hash": "87e278c057df706d285b0378af19b23c"
+  },
+  "specs/001-pedido-whatsapp/spec.md": {
+    "mtime": 1793247822.3632803,
+    "seen": 1793248195.8834162,
+    "ast_hash": "656c0aa4cacd65cbd5a923586e9c2d3d",
+    "semantic_hash": "656c0aa4cacd65cbd5a923586e9c2d3d"
+  },
+  "specs/002-fotos-y-logo.md": {
+    "mtime": 1793247822.3695574,
+    "seen": 1793248195.8834171,
+    "ast_hash": "0ebbf3d7662f023536bda1cd8be63a98",
+    "semantic_hash": "0ebbf3d7662f023536bda1cd8be63a98"
+  },
+  "specs/README.md": {
+    "mtime": 1793247822.3728845,
+    "seen": 1793248195.8834188,
+    "ast_hash": "4c239e22e57b04fecfa61493e87e2a22",
+    "semantic_hash": "4c239e22e57b04fecfa61493e87e2a22"
+  },
+  "specs/_template.md": {
+    "mtime": 1793247152.540761,
+    "seen": 1793248195.883421,
+    "ast_hash": "2a306e3bf5adc4772301982582be1df4",
+    "semantic_hash": "2a306e3bf5adc4772301982582be1df4"
+  },
+  "specs/roadmap.md": {
+    "mtime": 1793247822.3762116,
+    "seen": 1793248195.883422,
+    "ast_hash": "9627fda2a6224f7adfbda2e5b36dcc35",
+    "semantic_hash": "9627fda2a6224f7adfbda2e5b36dcc35"
+  }
+}
