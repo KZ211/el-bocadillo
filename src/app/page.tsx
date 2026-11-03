@@ -1,7 +1,7 @@
 import { existsSync } from "node:fs";
 import path from "node:path";
 import { OrderApp } from "@/components/order-app";
-import { categories, products } from "@/data/menu";
+import { categories, hero, products } from "@/data/menu";
 
 const publicFile = (...parts: string[]) => existsSync(path.join(process.cwd(), "public", ...parts));
 
@@ -12,5 +12,5 @@ export default function Home() {
   );
   const logo = publicFile("logo.png") ? "/logo.png" : null;
 
-  return <OrderApp categories={categories} products={withImages} logo={logo} />;
+  return <OrderApp categories={categories} products={withImages} hero={hero} logo={logo} />;
 }

@@ -11,11 +11,13 @@ type SheetProps = {
   full?: boolean;
   className?: string;
   footer?: ReactNode;
+  /** Foto a sangre arriba de todo (hoja de producto); el título pasa debajo. */
+  media?: ReactNode;
   children: ReactNode;
 };
 
 /** Hoja inferior sobre <dialog> nativo: foco atrapado, Escape y backdrop gratis. */
-export function Sheet({ open, onClose, title, full, className = "", footer, children }: SheetProps) {
+export function Sheet({ open, onClose, title, full, className = "", footer, media, children }: SheetProps) {
   const ref = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
@@ -35,21 +37,44 @@ export function Sheet({ open, onClose, title, full, className = "", footer, chil
         if (e.target === e.currentTarget) onClose();
       }}
     >
-      <div className={`flex flex-col ${full ? "h-dvh" : "max-h-[92dvh] md:max-h-[88dvh]"}`}>
-        <header className="flex items-center justify-between gap-4 px-5 pt-4 pb-2">
-          <h2 className="font-display text-2xl leading-tight">{title}</h2>
-          <button
-            type="button"
-            onClick={onClose}
-            aria-label="Cerrar"
-            className="-mr-2 grid size-11 shrink-0 place-items-center rounded-full text-muted transition-colors hover:bg-raised hover:text-text active:scale-95"
-          >
-            <X className="size-5" aria-hidden />
-          </button>
-        </header>
-        <div data-scroller className="min-h-0 flex-1 overflow-y-auto overscroll-contain">{children}</div>
+      <div className={`relative flex flex-col ${full ? "h-dvh" : "max-h-[92dvh] md:max-h-[88dvh]"}`}>
+        {media ? null : (
+          <header className="flex items-center justify-between gap-4 px-5 pt-4 pb-2">
+            <h2 className="font-display text-2xl leading-tight">{title}</h2>
+            <CloseButton onClose={onClose} />
+          </header>
+        )}
+        <div data-scroller className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
+          {media ? (
+            <>
+              {media}
+              <h2 className="px-5 pt-5 font-display text-[2rem] leading-none">{title}</h2>
+            </>
+          ) : null}
+          {children}
+        </div>
+        {media ? (
+          <div className="absolute top-3 right-3 rounded-full bg-ground/70 backdrop-blur-sm">
+            <CloseButton onClose={onClose} onMedia />
+          </div>
+        ) : null}
         {footer ? <div className="bg-surface px-5 pt-3 pb-[max(1rem,env(safe-area-inset-bottom))]">{footer}</div> : null}
       </div>
     </dialog>
+  );
+}
+
+function CloseButton({ onClose, onMedia }: { onClose: () => void; onMedia?: boolean }) {
+  return (
+    <button
+      type="button"
+      onClick={onClose}
+      aria-label="Cerrar"
+      className={`grid size-11 shrink-0 place-items-center rounded-full transition-colors active:scale-95 ${
+        onMedia ? "text-text hover:bg-raised" : "-mr-2 text-muted hover:bg-raised hover:text-text"
+      }`}
+    >
+      <X className="size-5" aria-hidden />
+    </button>
   );
 }

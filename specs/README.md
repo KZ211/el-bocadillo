@@ -15,5 +15,6 @@ Este proyecto se trabaja con **Spec Driven Development**: ninguna funcionalidad 
 |----|------|--------|
 | 001 | [Pedido por WhatsApp](./001-pedido-whatsapp/spec.md) | implementada (v1) |
 | 002 | [Fotos y logo](./002-fotos-y-logo.md) | borrador |
+| 003 | [Redesign basado en las grandes cadenas](./003-redesign-cadenas/spec.md) | implementada |
 
 Próximas ideas en [`roadmap.md`](./roadmap.md).

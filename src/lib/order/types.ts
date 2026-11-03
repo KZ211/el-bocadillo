@@ -1,6 +1,10 @@
+export type CategoryIcon = "burger" | "flame" | "sandwich" | "pizza";
+
 export type Category = {
   id: string;
   name: string;
+  /** Ícono del riel de categorías y del placeholder de fotos. */
+  icon?: CategoryIcon;
   /** Reservado para navegación jerárquica (subcategorías). */
   parentId?: string;
   description?: string;
@@ -22,7 +26,12 @@ export type Product = {
   /** Ingredientes que el cliente puede pedir quitar. */
   removable?: string[];
   available?: boolean;
+  /** Aparece en "Recomendadas". */
+  featured?: boolean;
 };
+
+/** Destacado del hero. */
+export type Hero = { productId: string; headline: string };
 
 export type CartLine = {
   key: string;

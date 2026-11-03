@@ -4,17 +4,37 @@ import { Check, Minus, Plus } from "lucide-react";
 import { useState } from "react";
 import { orderStore } from "@/data/store";
 import { formatMoney, MAX_QTY, unitPrice } from "@/lib/order/pricing";
-import type { Product } from "@/lib/order/types";
+import type { CategoryIcon, Product } from "@/lib/order/types";
+import { ProductArt } from "./product-art";
 import { Sheet } from "./sheet";
 
-type Props = { product: Product | null; open: boolean; onClose: () => void; onAdded: () => void };
+type Props = {
+  product: Product | null;
+  icon?: CategoryIcon;
+  open: boolean;
+  onClose: () => void;
+  onAdded: () => void;
+};
 
-export function ProductSheet({ product, open, onClose, onAdded }: Props) {
+export function ProductSheet({ product, icon, open, onClose, onAdded }: Props) {
   return (
     <Sheet
       open={open}
       onClose={onClose}
       title={product?.name ?? ""}
+      media={
+        product ? (
+          <ProductArt
+            key={product.id}
+            seed={product.id}
+            image={product.image}
+            icon={icon}
+            eager
+            className="aspect-[4/3] w-full md:aspect-[16/10]"
+            iconClassName="relative size-[34%] text-gold/85"
+          />
+        ) : null
+      }
     >
       {product ? <Configurator key={product.id} product={product} onAdded={onAdded} /> : null}
     </Sheet>
@@ -41,11 +61,7 @@ function Configurator({ product, onAdded }: { product: Product; onAdded: () => v
         onAdded();
       }}
     >
-      <div className="space-y-7 px-5 pb-6">
-        {product.image ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={product.image} alt="" className="aspect-[4/3] w-full rounded-xl object-cover" />
-        ) : null}
+      <div className="space-y-7 px-5 pt-2 pb-6">
         <p className="text-muted">{product.description}</p>
 
         {product.variants?.length ? (

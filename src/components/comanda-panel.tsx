@@ -1,19 +1,28 @@
 "use client";
 
-import { Copy, RotateCcw } from "lucide-react";
+import { Copy, Plus, RotateCcw } from "lucide-react";
 import { useMemo, useState } from "react";
 import { orderStore, useOrder } from "@/data/store";
 import { buildTicket, ticketToText, whatsappUrl } from "@/lib/order/message";
-import { formatMoney, subtotal } from "@/lib/order/pricing";
-import type { Product } from "@/lib/order/types";
+import { formatMoney, fromPrice, subtotal } from "@/lib/order/pricing";
+import type { CategoryIcon, Product } from "@/lib/order/types";
 import { validateCheckout, type CheckoutErrors } from "@/lib/order/validate";
 import { CheckoutForm } from "./checkout-form";
 import { WhatsAppIcon } from "./icons";
+import { ProductArt } from "./product-art";
 import { Ticket } from "./ticket";
 
 type Sent = { orderId: string; text: string; url: string };
 
-export function ComandaPanel({ getProduct }: { getProduct: (id: string) => Product | undefined }) {
+type Props = {
+  getProduct: (id: string) => Product | undefined;
+  /** "¿Le sumás algo?": complementos de categorías que faltan en el pedido. */
+  suggestions: Product[];
+  iconOf: Map<string, CategoryIcon | undefined>;
+  onAdd: (product: Product) => void;
+};
+
+export function ComandaPanel({ getProduct, suggestions, iconOf, onAdd }: Props) {
   const { lines, checkout, remember, orderId, lastKey } = useOrder();
   const [triedSend, setTriedSend] = useState(false);
   const [sent, setSent] = useState<Sent | null>(null);
@@ -60,6 +69,7 @@ export function ComandaPanel({ getProduct }: { getProduct: (id: string) => Produ
           <Ticket sections={sections} lines={lines} lastKey={lastKey} />
           <p className="mt-3 px-1 text-sm text-muted">Esto es exactamente lo que le llega al local por WhatsApp.</p>
         </div>
+        {suggestions.length ? <Suggestions products={suggestions} iconOf={iconOf} onAdd={onAdd} /> : null}
         {lines.length ? (
           <section aria-labelledby="datos-title" className="px-1">
             <h3 id="datos-title" className="mb-5 font-display text-2xl">
@@ -83,6 +93,56 @@ export function ComandaPanel({ getProduct }: { getProduct: (id: string) => Produ
         </div>
       ) : null}
     </div>
+  );
+}
+
+function Suggestions({
+  products,
+  iconOf,
+  onAdd,
+}: {
+  products: Product[];
+  iconOf: Map<string, CategoryIcon | undefined>;
+  onAdd: (product: Product) => void;
+}) {
+  return (
+    <section aria-labelledby="sumar-title" className="px-1">
+      <h3 id="sumar-title" className="font-display text-2xl">
+        ¿Le sumás algo?
+      </h3>
+      <ul className="mt-3 space-y-2">
+        {products.map((product) => (
+          <li key={product.id}>
+            <button
+              type="button"
+              onClick={() => onAdd(product)}
+              className="group flex w-full items-center gap-3 rounded-2xl bg-raised p-2 pr-3 text-left transition-colors hover:bg-edge active:scale-[0.99]"
+            >
+              <ProductArt
+                seed={product.id}
+                image={product.image}
+                icon={iconOf.get(product.categoryId)}
+                className="size-16 shrink-0 rounded-xl"
+              />
+              <span className="min-w-0 flex-1">
+                <span className="block truncate font-semibold">{product.name}</span>
+                <span className="tabular block text-sm text-gold">
+                  {product.variants?.length ? <span className="text-muted">desde </span> : null}
+                  {formatMoney(fromPrice(product))}
+                </span>
+              </span>
+              <span
+                aria-hidden
+                className="grid size-11 shrink-0 place-items-center rounded-full bg-gold text-on-gold transition group-hover:bg-gold-strong"
+              >
+                <Plus className="size-5" strokeWidth={2.5} />
+              </span>
+              <span className="sr-only">Agregar</span>
+            </button>
+          </li>
+        ))}
+      </ul>
+    </section>
   );
 }
 

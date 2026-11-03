@@ -47,3 +47,6 @@ next-env.d.ts
 # graphify: se versionan reporte y grafo, no cachés
 graphify-out/cache/
 graphify-out/.graphify_*
+
+# capturas de verificación (Playwright MCP)
+.playwright-mcp/

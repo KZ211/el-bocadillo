@@ -1,4 +1,4 @@
-import type { Category, Extra, Product } from "@/lib/order/types";
+import type { Category, Extra, Hero, Product } from "@/lib/order/types";
 
 /**
  * Menú de El Bocadillo — única fuente de verdad de productos y precios.
@@ -10,10 +10,10 @@ import type { Category, Extra, Product } from "@/lib/order/types";
  */
 
 export const categories: Category[] = [
-  { id: "burgers", name: "Burgers", description: "Todas vienen con porción de papas." },
-  { id: "quintuples", name: "Quíntuples", description: "Cinco medallones. Para valientes." },
-  { id: "bocadillos", name: "Bocadillos", description: "Sándwiches, papas y nuggets." },
-  { id: "pizzas", name: "Pizzas" },
+  { id: "burgers", name: "Burgers", icon: "burger", description: "Todas vienen con porción de papas." },
+  { id: "quintuples", name: "Quíntuples", icon: "flame", description: "Cinco medallones. Para valientes." },
+  { id: "bocadillos", name: "Bocadillos", icon: "sandwich", description: "Sándwiches, papas y nuggets." },
+  { id: "pizzas", name: "Pizzas", icon: "pizza" },
 ];
 
 const burgerSizes = (simple: number, doble: number, triple: number, cuadruple: number) => [
@@ -43,10 +43,17 @@ export const papasExtras: Extra[] = [
   { id: "milanesa", label: "Milanesa", price: 3500 },
 ];
 
+/**
+ * Destacado del hero. Cuando el local confirme una promo, cargala como
+ * producto y apuntá el hero a ella.
+ */
+export const hero: Hero = { productId: "extrema", headline: "¡No te quedes con las ganas!" };
+
 export const products: Product[] = [
   // Burgers
   {
     id: "cheeseburger",
+    featured: true,
     categoryId: "burgers",
     name: "Cheeseburger",
     description: "Medallón y cheddar. Con porción de papas.",
@@ -65,6 +72,7 @@ export const products: Product[] = [
   },
   {
     id: "onion",
+    featured: true,
     categoryId: "burgers",
     name: "Onion",
     description: "Medallón, cheddar, cebolla caramelizada, panceta y salsa de la casa. Con porción de papas.",
@@ -86,6 +94,7 @@ export const products: Product[] = [
   // Quíntuples
   {
     id: "big-beicon",
+    featured: true,
     categoryId: "quintuples",
     name: "Big Beicon 5X",
     description: "Cinco medallones con panceta y cheddar.",
@@ -130,6 +139,7 @@ export const products: Product[] = [
   },
   {
     id: "caja-papas",
+    featured: true,
     categoryId: "bocadillos",
     name: "Caja de papas",
     description: "Con verdeo, cheddar y panceta.",
