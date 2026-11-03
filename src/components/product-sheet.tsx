@@ -62,7 +62,7 @@ function Configurator({ product, onAdded }: { product: Product; onAdded: () => v
       }}
     >
       <div className="space-y-7 px-5 pt-2 pb-6">
-        <p className="text-muted">{product.description}</p>
+        {product.description ? <p className="text-muted">{product.description}</p> : null}
 
         {product.variants?.length ? (
           <fieldset>
@@ -158,15 +158,17 @@ function Configurator({ product, onAdded }: { product: Product; onAdded: () => v
 
         <div>
           <label htmlFor="item-note" className="mb-2 block font-semibold">
-            Aclaración <span className="font-normal text-muted">(opcional)</span>
+            {product.notePrompt ?? "Aclaración"}{" "}
+            {product.notePrompt ? null : <span className="font-normal text-muted">(opcional)</span>}
           </label>
           <textarea
             id="item-note"
             value={note}
             maxLength={140}
             rows={2}
+            required={Boolean(product.notePrompt)}
             onChange={(e) => setNote(e.target.value)}
-            placeholder="Ej: bien cocida, cortada al medio"
+            placeholder={product.notePrompt ? "Escribí el gusto" : "Ej: bien cocida, cortada al medio"}
             className="w-full resize-none rounded-[10px] bg-raised px-4 py-3 placeholder:text-muted focus:outline-2 focus:outline-gold"
           />
         </div>

@@ -1,10 +1,14 @@
-export type CategoryIcon = "burger" | "flame" | "sandwich" | "pizza";
+export type CategoryIcon = "burger" | "flame" | "sandwich" | "pizza" | "soda" | "cocktail" | "beer";
 
 export type Category = {
   id: string;
   name: string;
   /** Ícono del riel de categorías y del placeholder de fotos. */
   icon?: CategoryIcon;
+  /** Con alcohol: aviso +18 y fuera de "¿Le sumás algo?". */
+  adults?: boolean;
+  /** "list": renglones compactos para listas largas sin fotos (bebidas). Por defecto, grilla de tarjetas. */
+  layout?: "grid" | "list";
   /** Reservado para navegación jerárquica (subcategorías). */
   parentId?: string;
   description?: string;
@@ -26,6 +30,8 @@ export type Product = {
   /** Ingredientes que el cliente puede pedir quitar. */
   removable?: string[];
   available?: boolean;
+  /** Pregunta obligatoria en la aclaración (ej. el gusto): el "+" abre la hoja en vez de agregar directo. */
+  notePrompt?: string;
   /** Aparece en "Recomendadas". */
   featured?: boolean;
 };

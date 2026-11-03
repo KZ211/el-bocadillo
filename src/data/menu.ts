@@ -2,18 +2,20 @@ import type { Category, Extra, Hero, Product } from "@/lib/order/types";
 
 /**
  * Menú de El Bocadillo — única fuente de verdad de productos y precios.
- * Precios tomados del catálogo de WhatsApp Business y de los menús
- * "Menú Burger" / "Menú Bocadillos" (octubre 2026).
+ * Precios tomados de las cartas impresas del local (fotos en `docs/menus/`,
+ * spec 004) y del catálogo de WhatsApp Business (noviembre 2026).
  *
- * Para agregar una foto: copiar el archivo en `public/menu/<id>.jpg`
- * y agregar `image: "/menu/<id>.jpg"` al producto.
+ * Fotos: copiar el archivo en `public/menu/<id>.jpg` y aparece solo.
  */
 
 export const categories: Category[] = [
   { id: "burgers", name: "Burgers", icon: "burger", description: "Todas vienen con porción de papas." },
-  { id: "quintuples", name: "Quíntuples", icon: "flame", description: "Cinco medallones. Para valientes." },
+  { id: "de-la-casa", name: "De la casa", icon: "flame", description: "Las firmas de El Bocadillo. Para valientes." },
   { id: "bocadillos", name: "Bocadillos", icon: "sandwich", description: "Sándwiches, papas y nuggets." },
   { id: "pizzas", name: "Pizzas", icon: "pizza" },
+  { id: "bebidas", name: "Bebidas", icon: "soda", description: "Sin alcohol.", layout: "list" },
+  { id: "tragos", name: "Tragos en jarra", icon: "cocktail", adults: true, layout: "list" },
+  { id: "con-alcohol", name: "Latas y combos", icon: "beer", adults: true, layout: "list" },
 ];
 
 const burgerSizes = (simple: number, doble: number, triple: number, cuadruple: number) => [
@@ -47,7 +49,14 @@ export const papasExtras: Extra[] = [
  * Destacado del hero. Cuando el local confirme una promo, cargala como
  * producto y apuntá el hero a ella.
  */
-export const hero: Hero = { productId: "extrema", headline: "¡No te quedes con las ganas!" };
+export const hero: Hero = { productId: "big-beicon", headline: "¡No te quedes con las ganas!" };
+
+/**
+ * "¿Le sumás algo?": complementos en orden de prioridad, como el "¿con papas
+ * y bebida?" de las cadenas. Se sugiere uno por categoría que falte en el
+ * pedido; nunca bebidas con alcohol.
+ */
+export const complements: string[] = ["coca-175", "caja-papas", "nuggets"];
 
 export const products: Product[] = [
   // Burgers
@@ -91,11 +100,11 @@ export const products: Product[] = [
     removable: ["Cebolla caramelizada", "Panceta", "Huevo frito", "Jamón"],
   },
 
-  // Quíntuples
+  // De la casa
   {
     id: "big-beicon",
     featured: true,
-    categoryId: "quintuples",
+    categoryId: "de-la-casa",
     name: "Big Beicon 5X",
     description: "Cinco medallones con panceta y cheddar.",
     price: 18200,
@@ -104,12 +113,45 @@ export const products: Product[] = [
   },
   {
     id: "extrema",
-    categoryId: "quintuples",
+    categoryId: "de-la-casa",
     name: "Extrema",
     description: "Cinco medallones, baño completo de cheddar fundido y panceta cortada chiquita arriba.",
     price: 21200,
     extras: burgerExtras,
     removable: ["Panceta"],
+  },
+
+  // Odisea, Kratos y Tóxica: en la carta de firmas pero sin precio.
+  // Ocultas hasta que el local pase el precio (spec 004).
+  {
+    id: "odisea",
+    categoryId: "de-la-casa",
+    name: "Odisea",
+    description: "Tres medallones, cheddar, cebolla crispy, panceta, salsa tasty y barbacoa.",
+    price: 0,
+    available: false,
+    extras: burgerExtras,
+    removable: ["Cebolla crispy", "Panceta", "Salsa tasty", "Barbacoa"],
+  },
+  {
+    id: "kratos",
+    categoryId: "de-la-casa",
+    name: "Kratos",
+    description: "Tres medallones, cheddar, cebolla caramelizada, panceta, cebolla crispy, barbacoa y alioli.",
+    price: 0,
+    available: false,
+    extras: burgerExtras,
+    removable: ["Cebolla caramelizada", "Panceta", "Cebolla crispy", "Barbacoa", "Alioli"],
+  },
+  {
+    id: "toxica",
+    categoryId: "de-la-casa",
+    name: "Tóxica",
+    description: "Tres medallones, cheddar, Takis y criolla de la casa.",
+    price: 0,
+    available: false,
+    extras: burgerExtras,
+    removable: ["Takis", "Criolla"],
   },
 
   // Bocadillos
@@ -199,6 +241,41 @@ export const products: Product[] = [
     description: "Muzzarella y cheddar coronada con huevos fritos.",
     price: 20000,
   },
+
+  // Bebidas sin alcohol. La carta no lista los gustos de lata y 600 ml:
+  // el cliente lo escribe en la hoja (notePrompt).
+  { id: "gaseosa-lata", categoryId: "bebidas", name: "Gaseosa en lata", description: "", notePrompt: "¿Qué gusto?", price: 1700 },
+  { id: "gaseosa-600", categoryId: "bebidas", name: "Gaseosa 600 ml", description: "", notePrompt: "¿Qué gusto?", price: 2200 },
+  { id: "coca-175", categoryId: "bebidas", name: "Coca-Cola 1,75 L", description: "", price: 4500 },
+  { id: "pepsi-175", categoryId: "bebidas", name: "Pepsi 1,75 L", description: "", price: 4500 },
+  { id: "sprite-175", categoryId: "bebidas", name: "Sprite 1,75 L", description: "", price: 4500 },
+  { id: "manaos-225", categoryId: "bebidas", name: "Manaos 2,25 L", description: "", price: 1700 },
+  { id: "baggio-1l", categoryId: "bebidas", name: "Baggio multifruta 1 L", description: "", price: 2500 },
+  { id: "speed", categoryId: "bebidas", name: "Speed", description: "", price: 2700 },
+  { id: "monster", categoryId: "bebidas", name: "Monster Watermelon", description: "", price: 3200 },
+
+  // Tragos en jarra
+  { id: "snoopy", categoryId: "tragos", name: "Snoopy", description: "Sprite, rodaja de limón, Smirnoff verde y regaliz verde.", price: 7000 },
+  { id: "megamente", categoryId: "tragos", name: "Megamente", description: "Gatorade, Sky y regaliz azul.", price: 7000 },
+  { id: "wolverine", categoryId: "tragos", name: "Wolverine", description: "Smirnoff sandía, Baggio, regaliz arcoíris y Monster rojo.", price: 7000 },
+  { id: "deadpool", categoryId: "tragos", name: "Deadpool", description: "Monster rojo, Smirnoff rojo y gomitas.", price: 7000 },
+  { id: "recluta", categoryId: "tragos", name: "Recluta", description: "Speed con Sky.", price: 10000 },
+  { id: "jarra-fernet", categoryId: "tragos", name: "Fernet con Coca", description: "En jarra.", price: 8000 },
+  { id: "jarra-gancia", categoryId: "tragos", name: "Gancia con Sprite", description: "En jarra.", price: 7000 },
+
+  // Latas y combos
+  { id: "brahma-lata", categoryId: "con-alcohol", name: "Brahma en lata", description: "", price: 2500 },
+  { id: "schneider-lata", categoryId: "con-alcohol", name: "Schneider en lata", description: "", price: 2000 },
+  { id: "gancia-lata", categoryId: "con-alcohol", name: "Gancia en lata", description: "", price: 2700 },
+  { id: "fernet-lata", categoryId: "con-alcohol", name: "Fernet en lata", description: "", price: 3000 },
+  { id: "smirnoff-lata", categoryId: "con-alcohol", name: "Smirnoff en lata", description: "", price: 3000 },
+  { id: "combo-gancia-sprite", categoryId: "con-alcohol", name: "Combo Gancia + Sprite", description: "", price: 12000 },
+  { id: "combo-fernet-coca", categoryId: "con-alcohol", name: "Combo Fernet + Coca", description: "", price: 20000 },
+  { id: "combo-cosecha-speed", categoryId: "con-alcohol", name: "Combo Cosecha + Speed", description: "", price: 7000 },
+  { id: "combo-fede-speed", categoryId: "con-alcohol", name: "Combo Fede + Speed", description: "", price: 9500 },
+  { id: "combo-balbo-manaos", categoryId: "con-alcohol", name: "Combo Balbo + Manaos", description: "", price: 5500 },
+  { id: "combo-termidor-manaos", categoryId: "con-alcohol", name: "Combo Termidor + Manaos", description: "", price: 5000 },
+  { id: "combo-vina-manaos", categoryId: "con-alcohol", name: "Combo Viña + Manaos", description: "", price: 5500 },
 ];
 
 export const productsById = new Map(products.map((p) => [p.id, p]));

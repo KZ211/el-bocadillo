@@ -42,7 +42,7 @@ McDonald's y Burger King llevan años puliendo el pedido de comida rápida en el
 - R5: La hoja de producto tiene el primer tamaño preseleccionado y un CTA fijo "Agregar · $total" que se actualiza en vivo.
 - R6: Los productos sin variantes ni opciones obligatorias se agregan con "+" desde la tarjeta, con feedback visible sin abrir hojas.
 - R7: La barra "Ver pedido" aparece cuando hay ítems y muestra cantidad y total; en desktop el pedido vive en una columna lateral.
-- R8: La revisión del pedido sugiere hasta 3 complementos de categorías que todavía no están en el pedido.
+- R8: La revisión del pedido sugiere hasta 3 complementos (lista `complements` de `src/data/menu.ts`, en orden de prioridad), uno por categoría que todavía no está en el pedido. Así funciona el "¿con papas y bebida?" de las cadenas.
 - R9: El mensaje de WhatsApp sigue siendo idéntico al de la v1 (los tests de `order.test.ts` pasan sin cambios).
 - R10: Controles táctiles de 44px o más, contraste AA, `prefers-reduced-motion` respetado.
 

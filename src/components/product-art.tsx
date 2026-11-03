@@ -1,4 +1,4 @@
-import { Flame, Hamburger, Pizza, Sandwich, Utensils, type LucideIcon } from "lucide-react";
+import { Beer, CupSoda, Flame, Hamburger, Martini, Pizza, Sandwich, Utensils, type LucideIcon } from "lucide-react";
 import type { CategoryIcon } from "@/lib/order/types";
 
 export const categoryIcons: Record<CategoryIcon, LucideIcon> = {
@@ -6,6 +6,9 @@ export const categoryIcons: Record<CategoryIcon, LucideIcon> = {
   flame: Flame,
   sandwich: Sandwich,
   pizza: Pizza,
+  soda: CupSoda,
+  cocktail: Martini,
+  beer: Beer,
 };
 
 type Props = {

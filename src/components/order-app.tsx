@@ -11,12 +11,19 @@ import { categoryIcons, ProductArt } from "./product-art";
 import { ProductSheet } from "./product-sheet";
 import { Sheet } from "./sheet";
 
-type Props = { categories: Category[]; products: Product[]; hero: Hero; logo: string | null };
+type Props = {
+  categories: Category[];
+  products: Product[];
+  hero: Hero;
+  /** Ids de complementos para "¿Le sumás algo?", en orden de prioridad. */
+  complements: string[];
+  logo: string | null;
+};
 
-/** Sin tamaños para elegir: el "+" lo agrega directo, como el agregado rápido de las cadenas. */
-const isQuickAdd = (product: Product) => !product.variants?.length;
+/** Sin tamaños ni preguntas: el "+" lo agrega directo, como el agregado rápido de las cadenas. */
+const isQuickAdd = (product: Product) => !product.variants?.length && !product.notePrompt;
 
-export function OrderApp({ categories, products, hero, logo }: Props) {
+export function OrderApp({ categories, products, hero, complements, logo }: Props) {
   const byId = useMemo(() => new Map(products.map((p) => [p.id, p])), [products]);
   const getProduct = useCallback((id: string) => byId.get(id), [byId]);
   const iconOf = useMemo(() => new Map(categories.map((c) => [c.id, c.icon])), [categories]);
@@ -46,7 +53,14 @@ export function OrderApp({ categories, products, hero, logo }: Props) {
 
   const heroProduct = byId.get(hero.productId);
   const featured = available.filter((p) => p.featured);
-  const suggestions = useMemo(() => suggest(available, lines), [available, lines]);
+  const suggestions = useMemo(() => {
+    // Las bebidas con alcohol nunca se sugieren.
+    const adults = new Set(categories.filter((c) => c.adults).map((c) => c.id));
+    const pool = complements
+      .map((id) => byId.get(id))
+      .filter((p): p is Product => Boolean(p && p.available !== false && !adults.has(p.categoryId)));
+    return suggest(pool, lines, getProduct);
+  }, [byId, categories, complements, getProduct, lines]);
 
   return (
     <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_26rem] xl:grid-cols-[minmax(0,1fr)_28rem]">
@@ -130,19 +144,16 @@ function countByProduct(lines: CartLine[]): Map<string, number> {
   return counts;
 }
 
-/** "¿Le sumás algo?": hasta 3 productos de categorías que todavía no están en el pedido, recomendadas primero. */
-function suggest(products: Product[], lines: CartLine[]): Product[] {
+/** "¿Le sumás algo?": un complemento por categoría que todavía no está en el pedido. */
+function suggest(pool: Product[], lines: CartLine[], getProduct: (id: string) => Product | undefined): Product[] {
   if (!lines.length) return [];
-  const inOrder = new Set(lines.map((l) => l.productId));
-  const categoriesInOrder = new Set(products.filter((p) => inOrder.has(p.id)).map((p) => p.categoryId));
+  const taken = new Set(lines.map((l) => getProduct(l.productId)?.categoryId));
   const picked: Product[] = [];
-  const usedCategories = new Set<string>();
-  const ranked = [...products].sort((a, b) => Number(Boolean(b.featured)) - Number(Boolean(a.featured)));
-  for (const product of ranked) {
+  for (const product of pool) {
     if (picked.length === 3) break;
-    if (categoriesInOrder.has(product.categoryId) || usedCategories.has(product.categoryId)) continue;
+    if (taken.has(product.categoryId)) continue;
     picked.push(product);
-    usedCategories.add(product.categoryId);
+    taken.add(product.categoryId);
   }
   return picked;
 }
@@ -223,16 +234,27 @@ function HeroCard({
     <section aria-labelledby="hero-title" className="mx-auto max-w-5xl px-4 sm:px-6">
       <div className="relative isolate overflow-hidden rounded-[22px] bg-surface">
         <div className="absolute inset-0 -z-10">
+          {/* El mármol siempre de fondo; la foto, si hay, va recortada a la derecha y fundida con él. */}
           <ProductArt
             seed={`hero-${product.id}`}
-            image={product.image}
-            icon={icon}
-            eager
+            icon={product.image ? undefined : icon}
             className="size-full"
-            iconClassName="absolute -top-4 -right-6 size-44 text-gold/30 sm:-top-8 sm:right-8 sm:size-80"
+            iconClassName={
+              product.image
+                ? "hidden"
+                : "absolute -top-4 -right-6 size-44 text-gold/30 sm:-top-8 sm:right-8 sm:size-80"
+            }
           />
+          {product.image ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={product.image}
+              alt=""
+              className="fade-edges absolute -top-3 -right-6 size-56 object-cover sm:top-0 sm:right-6 sm:size-80"
+            />
+          ) : null}
         </div>
-        <div className={`flex min-h-60 flex-col justify-end p-5 pt-20 sm:min-h-80 sm:p-8 ${heroShade}`}>
+        <div className={`flex min-h-64 flex-col justify-end p-5 pt-24 sm:min-h-80 sm:p-8 ${heroShade}`}>
           <h2 id="hero-title" className="max-w-md font-display text-[2rem] leading-[0.95] text-balance sm:text-6xl">
             {hero.headline}
           </h2>
@@ -242,9 +264,10 @@ function HeroCard({
           <button
             type="button"
             onClick={() => onAdd(product)}
+            aria-label={`Pedir la ${product.name}, ${formatMoney(fromPrice(product))}`}
             className="mt-4 flex min-h-12 items-center justify-between gap-4 self-start rounded-full bg-gold pr-2 pl-5 font-semibold text-on-gold transition hover:bg-gold-strong active:scale-[0.98]"
           >
-            <span>Pedir la {product.name}</span>
+            <span>Pedila</span>
             <span className="tabular rounded-full bg-on-gold/10 px-3 py-1.5">{formatMoney(fromPrice(product))}</span>
           </button>
         </div>
@@ -318,15 +341,68 @@ function MenuSection({ category, products, card }: { category: Category; product
       <h2 id={`${category.id}-title`} className="font-display text-4xl leading-none sm:text-5xl">
         {category.name}
       </h2>
-      {category.description ? <p className="mt-2 text-muted">{category.description}</p> : null}
-      <ul className="mt-5 grid grid-cols-2 gap-x-3 gap-y-7 md:grid-cols-3 xl:grid-cols-4">
-        {products.map((product) => (
-          <li key={product.id}>
-            <ProductCard product={product} {...card} />
-          </li>
-        ))}
-      </ul>
+      {category.description || category.adults ? (
+        <p className="mt-2 text-muted">
+          {category.description}
+          {category.adults ? " Solo para mayores de 18." : null}
+        </p>
+      ) : null}
+      {category.layout === "list" ? (
+        <ul className={listRules}>
+          {products.map((product) => (
+            <li key={product.id}>
+              <ProductRow product={product} {...card} />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <ul className="mt-5 grid grid-cols-2 gap-x-3 gap-y-7 md:grid-cols-3 xl:grid-cols-4">
+          {products.map((product) => (
+            <li key={product.id}>
+              <ProductCard product={product} {...card} />
+            </li>
+          ))}
+        </ul>
+      )}
     </section>
+  );
+}
+
+const listRules = "mt-3 divide-y divide-edge md:grid md:grid-cols-2 md:gap-x-8 md:divide-y-0"; // taste-skill-ignore: lista de bebidas como renglones de pizarra
+
+/** Renglón compacto para listas largas sin fotos (bebidas): nombre, precio y "+". */
+function ProductRow({ product, qtyByProduct, onOpen, onAdd }: CardProps & { product: Product }) {
+  const qty = qtyByProduct.get(product.id) ?? 0;
+  return (
+    <div className="flex items-center gap-3 py-3 md:border-b md:border-edge">
+      <button type="button" onClick={() => onOpen(product)} className="group min-w-0 flex-1 text-left">
+        <span className="flex items-baseline gap-2">
+          {qty ? (
+            <span className="tabular inline-flex shrink-0 items-center gap-0.5 text-sm font-semibold text-gold">
+              <Check className="size-3.5" strokeWidth={3} aria-hidden />
+              {qty}
+              <span className="sr-only"> en tu pedido</span>
+            </span>
+          ) : null}
+          <span className="font-semibold transition-colors group-hover:text-gold">{product.name}</span>
+        </span>
+        {product.description ? (
+          <span className="mt-0.5 block line-clamp-2 text-sm text-muted">{product.description}</span>
+        ) : null}
+      </button>
+      <span className="tabular shrink-0 font-semibold text-gold">{formatMoney(fromPrice(product))}</span>
+      <button
+        key={qty}
+        type="button"
+        onClick={() => onAdd(product)}
+        aria-label={isQuickAdd(product) ? `Agregar ${product.name}` : `Elegir opciones de ${product.name}`}
+        className={`grid size-11 shrink-0 place-items-center rounded-full bg-raised text-gold transition hover:bg-gold hover:text-on-gold active:scale-90 ${
+          qty ? "motion-safe:animate-pop" : ""
+        }`}
+      >
+        <Plus className="size-5" strokeWidth={2.5} aria-hidden />
+      </button>
+    </div>
   );
 }
 
@@ -373,7 +449,7 @@ function ProductCard({
         key={qty}
         type="button"
         onClick={() => onAdd(product)}
-        aria-label={quick ? `Agregar ${product.name}` : `Elegir tamaño de ${product.name}`}
+        aria-label={quick ? `Agregar ${product.name}` : `Elegir opciones de ${product.name}`}
         className={`absolute right-2 grid size-11 place-items-center rounded-full bg-gold text-on-gold shadow-[0_6px_16px_rgb(0_0_0/0.45)] transition hover:bg-gold-strong active:scale-90 ${
           qty ? "motion-safe:animate-pop" : ""
         } ${wide ? "top-[calc(75cqw-3.25rem)]" : "top-[calc(100cqw-3.25rem)]"}`}

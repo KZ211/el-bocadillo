@@ -160,6 +160,12 @@ textarea {
     var(--color-surface);
 }
 
+/* Foto del hero fundida con el mármol: los bordes se desvanecen en vez de cortar. */
+.fade-edges {
+  -webkit-mask-image: radial-gradient(closest-side, #000 55%, transparent 100%);
+  mask-image: radial-gradient(closest-side, #000 55%, transparent 100%);
+}
+
 /* Hojas (dialog nativo): suben desde abajo en mobile. */
 dialog.sheet {
   margin: auto auto 0;
