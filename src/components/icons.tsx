@@ -5,3 +5,25 @@ export function WhatsAppIcon({ className }: { className?: string }) {
     </svg>
   );
 }
+
+/** Caja de papas en el trazo de lucide (lucide no trae una). */
+export function FriesIcon({ className, strokeWidth = 2 }: { className?: string; strokeWidth?: number }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+      className={className}
+    >
+      <path d="M8 10 7 3l2-.5L10 10" />
+      <path d="M12 10V2.5h2V10" />
+      <path d="m16 10 1-6.5 2 .5-1 6" />
+      <path d="M5 10h14l-2 11.5H7z" />
+      <path d="M9.5 14a2.5 2.5 0 0 0 5 0" />
+    </svg>
+  );
+}

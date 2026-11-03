@@ -8,9 +8,10 @@ import type { CheckoutErrors } from "@/lib/order/validate";
 
 type Props = { checkout: Checkout; remember: boolean; errors: CheckoutErrors };
 
+// Mismo orden que "¿Cómo lo querés?" (mode-step.tsx), en versión corta.
 const modes: { id: DeliveryMode; label: string }[] = [
-  { id: "retiro", label: "Retiro" },
   { id: "delivery", label: "Delivery" },
+  { id: "retiro", label: "Retiro" },
   { id: "local", label: "Comer acá" },
 ];
 

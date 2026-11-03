@@ -1,4 +1,4 @@
-export type CategoryIcon = "burger" | "flame" | "sandwich" | "pizza" | "soda" | "cocktail" | "beer";
+export type CategoryIcon = "burger" | "flame" | "sandwich" | "fries" | "pizza" | "soda" | "cocktail" | "beer";
 
 export type Category = {
   id: string;
@@ -35,6 +35,9 @@ export type Product = {
   /** Aparece en "Recomendadas". */
   featured?: boolean;
 };
+
+/** Un paso del pedido guiado (spec 005): qué categorías muestra. */
+export type OrderStep = { id: string; title: string; short: string; categoryIds: string[] };
 
 /** Destacado del hero. */
 export type Hero = { productId: string; headline: string };

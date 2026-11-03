@@ -30,7 +30,7 @@ Los precios del Menú Burger y del Menú Bocadillos coinciden con `src/data/menu
 ## Requisitos
 - R1: Precios exactos de la carta; donde hay una etiqueta escrita a mano encima, vale la etiqueta.
 - R2: Odisea, Kratos y Tóxica se cargan con `available: false` hasta que el local pase sus precios.
-- R3: "¿Le sumás algo?" sugiere primero una bebida sin alcohol (Coca-Cola 1,75 L) cuando el pedido no tiene bebida, y después papas o nuggets (`complements`).
+- R3 (reemplazado por la spec 005): "¿Le sumás algo?" sugiere primero una bebida sin alcohol (Coca-Cola 1,75 L) cuando el pedido no tiene bebida, y después papas o nuggets (`complements`).
 - R4: Las categorías con alcohol muestran el aviso de mayoría de edad y quedan fuera de las sugerencias.
 
 ## Criterios de aceptación
@@ -44,7 +44,7 @@ Los precios del Menú Burger y del Menú Bocadillos coinciden con `src/data/menu
 - `CategoryIcon` suma `soda`, `beer` y `cocktail`.
 - `Category.layout?: "grid" | "list"`: las listas largas sin fotos (bebidas) van en renglones compactos.
 - `Product.notePrompt?: string`: pregunta obligatoria (por ejemplo, "¿Qué gusto?"); el "+" abre la hoja en vez de agregar directo.
-- `complements: string[]` en `src/data/menu.ts`: complementos sugeridos, en orden de prioridad.
+- ~~`complements`~~: se quitó en la spec 005.
 
 ## Decisiones
 | Decisión | Alternativas | Motivo |

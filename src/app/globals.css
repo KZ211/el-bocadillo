@@ -92,7 +92,7 @@ html {
   color: var(--color-text);
   color-scheme: dark;
   -webkit-tap-highlight-color: transparent;
-  scroll-padding-top: 5.5rem;
+  scroll-padding-top: 10rem; /* barra de pasos + chips de categoría */
 }
 
 html:has(dialog[open]) {

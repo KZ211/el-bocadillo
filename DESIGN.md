@@ -29,6 +29,11 @@ typography:
     fontSize: "2.25rem"
     fontWeight: 400
     lineHeight: 1
+  step-title:
+    fontFamily: "Gloock, Georgia, serif"
+    fontSize: "2.4rem"
+    fontWeight: 400
+    lineHeight: 1
   hero:
     fontFamily: "Gloock, Georgia, serif"
     fontSize: "2rem"
@@ -142,11 +147,19 @@ components:
     textColor: "{colors.on-gold}"
     rounded: "{rounded.pill}"
     size: "44px"
-  order-bar:
+  step-bar:
     backgroundColor: "{colors.gold}"
     textColor: "{colors.on-gold}"
     rounded: "{rounded.pill}"
     height: "56px"
+  mode-option:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.text}"
+    rounded: "{rounded.hero}"
+    height: "96px"
+  mode-option-selected:
+    backgroundColor: "{colors.gold}"
+    textColor: "{colors.on-gold}"
   hero-card:
     backgroundColor: "{colors.surface}"
     textColor: "{colors.text}"
@@ -226,6 +239,7 @@ Una noche cálida de tres escalones con un dorado de marca y un papel térmico c
 ### Hierarchy
 - **Display** (400, 2.6rem en mobile y 3.75rem desde sm, line-height 0.95, -0.01em): solo el wordmark "El Bocadillo" en dorado.
 - **Headline** (400, 2.25rem en mobile y 3rem desde sm, line-height 1): nombres de categoría; también el número de comanda enviada.
+- **Step title** (400, 2.4rem en mobile y 3rem desde sm, line-height 1): títulos de pantalla ("¿Cómo lo querés?", "Elegí tu comida", "Tu pedido").
 - **Hero** (400, 2rem en mobile y 3.75rem desde sm, line-height 0.95, `text-balance`): el titular del destacado.
 - **Card title** (400, 1.2rem, line-height 1.25, `text-balance`): nombres de producto en las tarjetas.
 - **Title** (400, 1.6rem, line-height 1.25): reservado; los productos usan Card title en las tarjetas y 2rem en la hoja de producto. Los títulos de hoja y de sección ("Tu comanda", "Tus datos") usan Gloock a 1.5rem.
@@ -242,11 +256,15 @@ Una noche cálida de tres escalones con un dorado de marca y un papel térmico c
 
 Mobile-first en una columna de hasta 48rem centrada, con margen lateral de 16px (24px desde 640px). Las categorías arrancan con 40px de aire arriba; las filas del menú son renglones de pizarra separados por una línea `edge`, con 20px de aire vertical; los formularios respiran a 28px entre grupos y 16px dentro de un grupo.
 
-Orden de la página: encabezado (nombre, dirección y estado), hero destacado, barra de categorías fija, "Recomendadas" en carrusel horizontal con snap (tarjetas al 72% del ancho), y una sección por categoría con grilla de tarjetas: 2 columnas en mobile, 3 desde 768px y 4 desde 1280px, con 12px entre columnas y 28px entre filas. La columna del menú llega hasta 64rem.
+El pedido es un flujo por pantallas, como el kiosco de McDonald's (spec 005): "¿Cómo lo querés?", los pasos del menú (Comida, Acompañar, Bebidas, definidos en `steps` de `src/data/menu.ts`) y "Tu pedido". Cada pantalla es una entrada del historial, así que el botón atrás del celular vuelve al paso anterior.
 
-La barra de categorías es fija arriba sobre el suelo al 95% con desenfoque, con scroll horizontal sin barra y la categoría visible centrada. En mobile, la barra "Ver pedido" aparece al pie cuando hay ítems (margen de 12px, respeta `safe-area-inset-bottom`) y el contenido reserva 8rem al pie para no quedar tapado.
+- **"¿Cómo lo querés?":** encabezado completo (nombre, dirección y estado, con el aviso de cerrado) y tres opciones grandes.
+- **Pasos del menú:** encabezado compacto en una línea, barra de pasos fija y título del paso en Gloock a 2.4rem. En Comida van además el hero y "Recomendadas" (carrusel con snap, tarjetas al 72% del ancho). Después, una sección por categoría con grilla de tarjetas: 2 columnas en mobile, 3 desde 768px y 4 desde 1280px, con 12px entre columnas y 28px entre filas. La columna del menú llega hasta 64rem.
+- **"Tu pedido":** una columna de 36rem con la comanda, los datos y "Enviar pedido" pegajoso al pie.
 
-Desde 1024px la página pasa a dos columnas: menú flexible a la izquierda y la comanda en un aside fijo de alto completo (26rem, 28rem desde 1280px) sobre surface, con su propio scroll. La comanda vive en el aside o en la hoja, nunca en los dos a la vez.
+La barra de pasos (con las chips de categoría del paso debajo, si tiene más de una) es fija arriba sobre el suelo al 95% con desenfoque; `scroll-padding-top` es de 10rem para que las secciones no queden tapadas. En cada paso del menú, la barra inferior es fija al pie (margen de 12px, respeta `safe-area-inset-bottom`, con un velo de suelo detrás) y el contenido reserva 9rem al pie.
+
+Desde 1024px, los pasos del menú pasan a dos columnas: el paso a la izquierda (con la barra inferior pegajosa al pie de la columna) y la comanda en vivo en un aside fijo de alto completo (26rem, 28rem desde 1280px) sobre surface. En "¿Cómo lo querés?" y "Tu pedido" no hay aside: la comanda está en la pantalla principal.
 
 Las hojas son `dialog` nativos: suben desde abajo a ancho completo en mobile (máx. 92dvh; la comanda ocupa la pantalla completa) y se centran a 34rem desde 768px. Toda barra de acción dentro de una hoja es pegajosa al pie sobre surface.
 
@@ -293,7 +311,6 @@ Táctiles y seguros, siempre en píldora.
 - **Mármol (placeholder de foto):** superficie con dos brillos radiales cálidos, tres vetas doradas en SVG (1.5px al 55% y 0.75px al 30%) que salen del id del producto, y el ícono lucide de la categoría en dorado al 85% con trazo 1.25.
 - **Hero:** caja de 22px de radio y 16rem de alto mínimo, siempre sobre mármol. Con foto, la foto va recortada arriba a la derecha (14rem, 20rem desde sm) con los bordes desvanecidos por una máscara radial (`.fade-edges`) para fundirse con el mármol; sin foto, el ícono de la categoría grande y al 30%. Un velo de abajo hacia arriba asegura la lectura del texto. Titular en Hero, nombre y descripción del producto en 2 líneas, y CTA dorado "Pedila" con el precio en una cápsula dentro del botón. El destacado sale de `hero` en `src/data/menu.ts`.
 - **Renglón compacto (listas sin fotos):** para categorías con `layout: "list"` (bebidas, tragos, latas y combos). Renglón separado por línea `edge` con nombre en Label, receta opcional en gris de 2 líneas, precio dorado tabular y "+" raised de 44px que se vuelve dorado en hover. Una columna en mobile y dos desde 768px. Con ítems en el pedido, check y cantidad en dorado antes del nombre.
-- **Sugerencia:** fila raised de 16px de radio con mármol de 64px, nombre, precio y "+" dorado. Las sugerencias aparecen solo en la revisión del pedido, nunca al agregar, y salen de `complements` en `src/data/menu.ts`: un complemento por categoría que falte, nunca alcohol.
 - **Aviso:** raised con 10px de radio y padding de 12px por 16px (cerrado, plazo para modificar).
 - **Sombra:** ninguna (ver Elevation & Depth).
 
@@ -306,10 +323,12 @@ Táctiles y seguros, siempre en píldora.
 - **Casilla:** cuadro de 24px con 6px de radio; marcada en dorado con check de trazo 3.
 
 ### Navigation
-Barra de categorías fija arriba sobre ground con chips en píldora (ícono de la categoría y nombre) y scroll horizontal; el chip activo sigue a la sección visible. No hay otra navegación: el resto pasa en hojas.
+- **"¿Cómo lo querés?":** tres opciones de 96px y 22px de radio sobre surface: Delivery (moto), Paso a retirar (bolsa) y Para consumir en el local (cubiertos). Cada una lleva el ícono en un círculo raised de 56px, el nombre en Label a 1.125rem, una ayuda en gris y un chevron. El modo elegido antes aparece en dorado. Tocar una opción la elige y avanza.
+- **Barra de pasos:** chip del modo elegido ("Delivery · cambiar", vuelve al inicio), y debajo una grilla con un segmento por pantalla: nombre en 0.75rem y una barra de 4px, dorada hasta el paso actual y raised después. El paso actual lleva el nombre en dorado y `aria-current="step"`. Todos los segmentos se pueden tocar (zona de 44px).
+- **Chips de categoría:** solo las del paso, en píldora (ícono y nombre), con scroll horizontal. El chip activo sigue a la sección visible. Son botones y no anclas, así no ensucian el historial.
 
-### Barra "Ver pedido"
-Píldora dorada de 56px fija al pie en mobile, visible solo con ítems. Lleva a la izquierda un círculo de tinta con la cantidad en dorado, "Ver pedido", el total tabular y un chevron. Entra subiendo (420ms) y con cada cambio rebota 8px. Abre la hoja "Tu pedido" a pantalla completa. Desde 1024px no existe: el pedido vive en la columna lateral.
+### Barra del paso
+Al pie de cada paso del menú. A la izquierda, si hay ítems, una píldora raised de 56px con la cantidad en un círculo dorado y el total; tocarla lleva a "Tu pedido" y con cada cambio rebota 8px. A la derecha, la acción dorada de 56px "Siguiente: <paso>" con chevron. En los pasos de complementos, si no se agregó nada de ese paso, dice "No, gracias".
 
 ### Hojas
 `dialog` nativo sobre surface con título en Gloock a 1.5rem y botón de cerrar circular. La hoja de producto abre con la foto (o el mármol) a sangre en 4:3 (16:10 desde 768px), el botón de cerrar flotando sobre ella en un círculo de noche al 70%, y el nombre debajo en Gloock a 2rem. Entran desde abajo en 380ms con `cubic-bezier(0.16, 1, 0.3, 1)`; el velo aparece en 300ms. Con movimiento reducido todas las transiciones duran 1ms.
@@ -330,7 +349,7 @@ El ticket es papel sin radio con borde dentado, Martian Mono a 12.5px, 28px arri
 
 ### Don't:
 - **Don't** copiar la identidad de McDonald's o Burger King: ni rojo y amarillo, ni naranja y marrón, ni sus nombres, logos o textos.
-- **Don't** usar badges rojos de contador ni sugerir productos al agregar.
+- **Don't** usar badges rojos de contador ni sugerir productos al agregar: las sugerencias son los pasos del flujo.
 - **Don't** usar Martian Mono fuera del papel térmico ni tokens `paper-*` sobre la noche.
 - **Don't** redondear el papel: sus bordes son dientes de 7px o cortes punteados.
 - **Don't** agregar sombras a superficies de noche; solo flotan con sombra el "+" de la tarjeta y la barra "Ver pedido".

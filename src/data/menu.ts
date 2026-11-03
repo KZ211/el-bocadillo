@@ -1,4 +1,4 @@
-import type { Category, Extra, Hero, Product } from "@/lib/order/types";
+import type { Category, Extra, Hero, OrderStep, Product } from "@/lib/order/types";
 
 /**
  * Menú de El Bocadillo — única fuente de verdad de productos y precios.
@@ -11,7 +11,8 @@ import type { Category, Extra, Hero, Product } from "@/lib/order/types";
 export const categories: Category[] = [
   { id: "burgers", name: "Burgers", icon: "burger", description: "Todas vienen con porción de papas." },
   { id: "de-la-casa", name: "De la casa", icon: "flame", description: "Las firmas de El Bocadillo. Para valientes." },
-  { id: "bocadillos", name: "Bocadillos", icon: "sandwich", description: "Sándwiches, papas y nuggets." },
+  { id: "sandwiches", name: "Sándwiches", icon: "sandwich" },
+  { id: "acompanamientos", name: "Papas y nuggets", icon: "fries" },
   { id: "pizzas", name: "Pizzas", icon: "pizza" },
   { id: "bebidas", name: "Bebidas", icon: "soda", description: "Sin alcohol.", layout: "list" },
   { id: "tragos", name: "Tragos en jarra", icon: "cocktail", adults: true, layout: "list" },
@@ -52,11 +53,15 @@ export const papasExtras: Extra[] = [
 export const hero: Hero = { productId: "big-beicon", headline: "¡No te quedes con las ganas!" };
 
 /**
- * "¿Le sumás algo?": complementos en orden de prioridad, como el "¿con papas
- * y bebida?" de las cadenas. Se sugiere uno por categoría que falte en el
- * pedido; nunca bebidas con alcohol.
+ * Pasos del pedido, como el kiosco de McDonald's (spec 005). Antes va
+ * "¿Cómo lo querés?" y después "Tu pedido". Para sumar postres, agregá
+ * la categoría y un paso acá.
  */
-export const complements: string[] = ["coca-175", "caja-papas", "nuggets"];
+export const steps: OrderStep[] = [
+  { id: "comida", title: "Elegí tu comida", short: "Comida", categoryIds: ["burgers", "de-la-casa", "sandwiches", "pizzas"] },
+  { id: "acompanar", title: "¿Algo para acompañar?", short: "Acompañar", categoryIds: ["acompanamientos"] },
+  { id: "bebidas", title: "¿Y para tomar?", short: "Bebidas", categoryIds: ["bebidas", "tragos", "con-alcohol"] },
+];
 
 export const products: Product[] = [
   // Burgers
@@ -154,10 +159,10 @@ export const products: Product[] = [
     removable: ["Takis", "Criolla"],
   },
 
-  // Bocadillos
+  // Sándwiches, papas y nuggets
   {
     id: "mila-simple",
-    categoryId: "bocadillos",
+    categoryId: "sandwiches",
     name: "Sándwich de milanesa simple",
     description: "Jamón, queso y aderezos.",
     price: 14000,
@@ -165,7 +170,7 @@ export const products: Product[] = [
   },
   {
     id: "mila-completo",
-    categoryId: "bocadillos",
+    categoryId: "sandwiches",
     name: "Sándwich de milanesa completo",
     description: "Tomate, lechuga, jamón, queso y huevo frito.",
     price: 16000,
@@ -173,7 +178,7 @@ export const products: Product[] = [
   },
   {
     id: "lomito",
-    categoryId: "bocadillos",
+    categoryId: "sandwiches",
     name: "Sándwich de lomito",
     description: "Tomate, lechuga, jamón y queso.",
     price: 14500,
@@ -182,7 +187,7 @@ export const products: Product[] = [
   {
     id: "caja-papas",
     featured: true,
-    categoryId: "bocadillos",
+    categoryId: "acompanamientos",
     name: "Caja de papas",
     description: "Con verdeo, cheddar y panceta.",
     variants: [
@@ -194,7 +199,7 @@ export const products: Product[] = [
   },
   {
     id: "nuggets",
-    categoryId: "bocadillos",
+    categoryId: "acompanamientos",
     name: "Caja de nuggets",
     description: "Nuggets de pollo con aderezo.",
     price: 10500,
@@ -202,7 +207,7 @@ export const products: Product[] = [
   },
   {
     id: "nuggets-papas",
-    categoryId: "bocadillos",
+    categoryId: "acompanamientos",
     name: "Caja de nuggets + papas",
     description: "Nuggets de pollo con papas.",
     price: 13000,

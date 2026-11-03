@@ -1,41 +1,62 @@
 "use client";
 
-import { Copy, Plus, RotateCcw } from "lucide-react";
+import { Copy, RotateCcw } from "lucide-react";
 import { useMemo, useState } from "react";
 import { orderStore, useOrder } from "@/data/store";
 import { buildTicket, ticketToText, whatsappUrl } from "@/lib/order/message";
-import { formatMoney, fromPrice, subtotal } from "@/lib/order/pricing";
-import type { CategoryIcon, Product } from "@/lib/order/types";
+import { formatMoney, subtotal } from "@/lib/order/pricing";
+import type { Product } from "@/lib/order/types";
 import { validateCheckout, type CheckoutErrors } from "@/lib/order/validate";
 import { CheckoutForm } from "./checkout-form";
 import { WhatsAppIcon } from "./icons";
-import { ProductArt } from "./product-art";
 import { Ticket } from "./ticket";
 
 type Sent = { orderId: string; text: string; url: string };
 
 type Props = {
   getProduct: (id: string) => Product | undefined;
-  /** "¿Le sumás algo?": complementos de categorías que faltan en el pedido. */
-  suggestions: Product[];
-  iconOf: Map<string, CategoryIcon | undefined>;
-  onAdd: (product: Product) => void;
+  /** Pedido vacío: vuelve al primer paso del menú. */
+  onEmpty: () => void;
+  /** Tras enviar, "Hacer otro pedido" vuelve a "¿Cómo lo querés?". */
+  onNewOrder: () => void;
 };
 
-export function ComandaPanel({ getProduct, suggestions, iconOf, onAdd }: Props) {
-  const { lines, checkout, remember, orderId, lastKey } = useOrder();
-  const [triedSend, setTriedSend] = useState(false);
-  const [sent, setSent] = useState<Sent | null>(null);
-
+/** La comanda en vivo, tal cual le llega al local (aside de desktop y paso "Tu pedido"). */
+export function TicketPreview({ getProduct }: { getProduct: (id: string) => Product | undefined }) {
+  const { lines, checkout, orderId, lastKey } = useOrder();
   const sections = useMemo(
     () => buildTicket({ orderId, lines, checkout, getProduct }),
     [orderId, lines, checkout, getProduct],
   );
+  return (
+    <div>
+      <Ticket sections={sections} lines={lines} lastKey={lastKey} />
+      <p className="mt-3 px-1 text-sm text-muted">Esto es exactamente lo que le llega al local por WhatsApp.</p>
+    </div>
+  );
+}
+
+/** Paso "Tu pedido": comanda, datos y enviar por WhatsApp. */
+export function ComandaPanel({ getProduct, onEmpty, onNewOrder }: Props) {
+  const { lines, checkout, remember, orderId } = useOrder();
+  const [triedSend, setTriedSend] = useState(false);
+  const [sent, setSent] = useState<Sent | null>(null);
+
   const total = subtotal(lines, getProduct);
   // Tras el primer intento, los errores se recalculan en vivo mientras corrige.
   const errors: CheckoutErrors = triedSend ? validateCheckout(checkout, total) : {};
 
-  if (sent) return <SentState sent={sent} onNew={() => setSent(null)} />;
+  if (sent) {
+    return (
+      <SentState
+        sent={sent}
+        onNew={() => {
+          setSent(null);
+          onNewOrder();
+        }}
+      />
+    );
+  }
 
   const send = () => {
     const found = validateCheckout(checkout, total);
@@ -44,14 +65,10 @@ export function ComandaPanel({ getProduct, suggestions, iconOf, onAdd }: Props) 
     if (first) {
       const field = document.getElementById(first);
       field?.focus({ preventScroll: true });
-      const scroller = field?.closest<HTMLElement>("[data-scroller]");
-      if (field && scroller) {
-        const top = field.getBoundingClientRect().top - scroller.getBoundingClientRect().top + scroller.scrollTop;
-        scroller.scrollTo({ top: top - scroller.clientHeight / 2, behavior: "smooth" });
-      }
+      field?.scrollIntoView({ block: "center", behavior: "smooth" });
       return;
     }
-    const text = ticketToText(sections);
+    const text = ticketToText(buildTicket({ orderId, lines, checkout, getProduct }));
     const url = whatsappUrl(text);
     // Sin "noopener" en features: con él window.open devuelve null y no se puede detectar el bloqueo.
     const win = window.open(url, "_blank");
@@ -64,12 +81,8 @@ export function ComandaPanel({ getProduct, suggestions, iconOf, onAdd }: Props) 
 
   return (
     <div className="flex min-h-full flex-col">
-      <div className="space-y-8 px-4 pb-8 sm:px-5">
-        <div>
-          <Ticket sections={sections} lines={lines} lastKey={lastKey} />
-          <p className="mt-3 px-1 text-sm text-muted">Esto es exactamente lo que le llega al local por WhatsApp.</p>
-        </div>
-        {suggestions.length ? <Suggestions products={suggestions} iconOf={iconOf} onAdd={onAdd} /> : null}
+      <div className="space-y-8 pb-8">
+        <TicketPreview getProduct={getProduct} />
         {lines.length ? (
           <section aria-labelledby="datos-title" className="px-1">
             <h3 id="datos-title" className="mb-5 font-display text-2xl">
@@ -77,11 +90,19 @@ export function ComandaPanel({ getProduct, suggestions, iconOf, onAdd }: Props) 
             </h3>
             <CheckoutForm checkout={checkout} remember={remember} errors={errors} />
           </section>
-        ) : null}
+        ) : (
+          <button
+            type="button"
+            onClick={onEmpty}
+            className="flex min-h-12 w-full items-center justify-center rounded-full bg-gold px-5 font-semibold text-on-gold transition hover:bg-gold-strong active:scale-[0.98]"
+          >
+            Elegir mi comida
+          </button>
+        )}
       </div>
 
       {lines.length ? (
-        <div className="sticky bottom-0 mt-auto bg-surface px-4 pt-3 pb-[max(1rem,env(safe-area-inset-bottom))] sm:px-5">
+        <div className="sticky bottom-0 mt-auto bg-ground pt-3 pb-[max(1rem,env(safe-area-inset-bottom))]">
           <button
             type="button"
             onClick={send}
@@ -96,60 +117,10 @@ export function ComandaPanel({ getProduct, suggestions, iconOf, onAdd }: Props) 
   );
 }
 
-function Suggestions({
-  products,
-  iconOf,
-  onAdd,
-}: {
-  products: Product[];
-  iconOf: Map<string, CategoryIcon | undefined>;
-  onAdd: (product: Product) => void;
-}) {
-  return (
-    <section aria-labelledby="sumar-title" className="px-1">
-      <h3 id="sumar-title" className="font-display text-2xl">
-        ¿Le sumás algo?
-      </h3>
-      <ul className="mt-3 space-y-2">
-        {products.map((product) => (
-          <li key={product.id}>
-            <button
-              type="button"
-              onClick={() => onAdd(product)}
-              className="group flex w-full items-center gap-3 rounded-2xl bg-raised p-2 pr-3 text-left transition-colors hover:bg-edge active:scale-[0.99]"
-            >
-              <ProductArt
-                seed={product.id}
-                image={product.image}
-                icon={iconOf.get(product.categoryId)}
-                className="size-16 shrink-0 rounded-xl"
-              />
-              <span className="min-w-0 flex-1">
-                <span className="block truncate font-semibold">{product.name}</span>
-                <span className="tabular block text-sm text-gold">
-                  {product.variants?.length ? <span className="text-muted">desde </span> : null}
-                  {formatMoney(fromPrice(product))}
-                </span>
-              </span>
-              <span
-                aria-hidden
-                className="grid size-11 shrink-0 place-items-center rounded-full bg-gold text-on-gold transition group-hover:bg-gold-strong"
-              >
-                <Plus className="size-5" strokeWidth={2.5} />
-              </span>
-              <span className="sr-only">Agregar</span>
-            </button>
-          </li>
-        ))}
-      </ul>
-    </section>
-  );
-}
-
 function SentState({ sent, onNew }: { sent: Sent; onNew: () => void }) {
   const [copied, setCopied] = useState(false);
   return (
-    <div className="space-y-6 px-5 pt-2 pb-10" role="status">
+    <div className="space-y-6 pt-2 pb-10" role="status">
       <div>
         <p className="font-display text-4xl leading-none text-gold">{sent.orderId}</p>
         <h3 className="mt-3 font-display text-2xl">¡Comanda lista!</h3>

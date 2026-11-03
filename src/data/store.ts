@@ -3,7 +3,7 @@
 import { useSyncExternalStore } from "react";
 import { addLine, MAX_QTY } from "@/lib/order/pricing";
 import { newOrderId } from "@/lib/order/message";
-import { emptyCheckout, type CartLine, type Checkout } from "@/lib/order/types";
+import { emptyCheckout, type CartLine, type Checkout, type DeliveryMode } from "@/lib/order/types";
 
 type State = {
   lines: CartLine[];
@@ -12,6 +12,8 @@ type State = {
   orderId: string;
   /** Última línea tocada: queda resaltada en el ticket hasta el próximo cambio. */
   lastKey: string | null;
+  /** Modo de entrega guardado de una visita anterior (se resalta en "¿Cómo lo querés?"). */
+  savedMode: DeliveryMode | null;
 };
 
 const CART_KEY = "bocadillo:comanda";
@@ -23,6 +25,7 @@ const initial: State = {
   remember: true,
   orderId: "B-····",
   lastKey: null,
+  savedMode: null,
 };
 
 let state = initial;
@@ -58,6 +61,7 @@ function load() {
     orderId: cart?.orderId ?? newOrderId(),
     checkout: customer ? { ...emptyCheckout, ...customer.checkout, cashAmount: "", notes: "" } : emptyCheckout,
     remember: true,
+    savedMode: customer?.checkout.mode ?? null,
   };
 }
 
@@ -97,7 +101,11 @@ export const orderStore = {
     set({ lines: state.lines.filter((l) => l.key !== key), lastKey: null });
   },
   updateCheckout(patch: Partial<Checkout>) {
-    set({ checkout: { ...state.checkout, ...patch }, lastKey: null });
+    set({
+      checkout: { ...state.checkout, ...patch },
+      lastKey: null,
+      ...(patch.mode ? { savedMode: patch.mode } : {}),
+    });
   },
   setRemember(remember: boolean) {
     set({ remember });
