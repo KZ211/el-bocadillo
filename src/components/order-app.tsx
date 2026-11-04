@@ -1,7 +1,7 @@
 "use client";
 
 import { Check, ChevronRight, Motorbike, Plus, ShoppingBag, Utensils, type LucideIcon } from "lucide-react";
-import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { useCallback, useEffect, useMemo, useState, type ReactNode } from "react";
 import { orderStore, useOrder } from "@/data/store";
 import { storeStatus, type StoreStatus } from "@/lib/order/hours";
 import { formatMoney, fromPrice, subtotal } from "@/lib/order/pricing";
@@ -468,8 +468,9 @@ function HeroCard({
 }
 
 function CategoryNav({ categories }: { categories: Category[] }) {
+  // Solo resalta el chip de la sección visible: nunca mueve la página ni la fila de chips,
+  // así el scroll queda libre (un scrollIntoView dentro de la barra fija hacía saltar la página).
   const [active, setActive] = useState<string | undefined>();
-  const navRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     // Secciones dentro de la franja: la activa es la primera en el orden del menú.
@@ -492,13 +493,8 @@ function CategoryNav({ categories }: { categories: Category[] }) {
     return () => observer.disconnect();
   }, [categories]);
 
-  useEffect(() => {
-    if (!active) return;
-    navRef.current?.querySelector(`[data-cat="${active}"]`)?.scrollIntoView({ inline: "center", block: "nearest" });
-  }, [active]);
-
   return (
-    <nav ref={navRef} aria-label="Categorías" className="pb-3">
+    <nav aria-label="Categorías" className="pb-3">
       <ul className="mx-auto flex max-w-5xl gap-2 overflow-x-auto px-4 [scrollbar-width:none] sm:px-6">
         {categories.map((c) => {
           const Icon = c.icon ? categoryIcons[c.icon] : null;

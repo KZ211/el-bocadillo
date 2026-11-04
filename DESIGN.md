@@ -326,7 +326,7 @@ Táctiles y seguros, siempre en píldora.
 ### Navigation
 - **"¿Cómo lo querés?":** tres opciones de 96px y 22px de radio sobre surface: Delivery (moto), Paso a retirar (bolsa) y Para consumir en el local (cubiertos). Cada una lleva el ícono en un círculo raised de 56px, el nombre en Label a 1.125rem, una ayuda en gris y un chevron. El modo elegido antes aparece en dorado. Tocar una opción la elige y avanza.
 - **Barra de pasos:** chip del modo elegido ("Delivery · cambiar", vuelve al inicio), y debajo una grilla con un segmento por pantalla: nombre en 0.75rem y una barra de 4px, dorada hasta el paso actual y raised después. El paso actual lleva el nombre en dorado y `aria-current="step"`. Todos los segmentos se pueden tocar (zona de 44px).
-- **Chips de categoría:** solo las del paso, en píldora (ícono y nombre), con scroll horizontal. El chip activo sigue a la sección visible. Son botones y no anclas, así no ensucian el historial.
+- **Chips de categoría:** solo las del paso, en píldora (ícono y nombre), con scroll horizontal. El chip activo se resalta según la sección visible, pero nunca mueve la página ni la fila de chips: el scroll es libre. Tocar un chip lleva a su sección con scroll suave. Son botones y no anclas, así no ensucian el historial.
 
 ### Barra del paso
 Al pie de cada paso del menú. A la izquierda, si hay ítems, una píldora raised de 56px con la cantidad en un círculo dorado y el total; tocarla lleva a "Tu pedido" y con cada cambio rebota 8px. A la derecha, la acción dorada de 56px con "Siguiente" en Label a 1.125rem, el destino debajo en 0.75rem (tinta al 70%) y un chevron. Las dos líneas hacen que entre al lado del total aun en 360px. Después del primer paso (hoy, Bebidas), si no se agregó nada de ese paso, dice "No, gracias".
@@ -346,6 +346,7 @@ El ticket es papel sin radio con borde dentado, Martian Mono a 12.5px, 28px arri
 - **Do** separar superficies de noche subiendo un escalón tonal (ground, surface, raised, edge).
 - **Do** mantener todo control táctil en 44px o más (48px en campos y acciones de hoja, 56px en enviar).
 - **Do** usar `cubic-bezier(0.16, 1, 0.3, 1)` para todo movimiento y respetar `prefers-reduced-motion`.
+- **Do** dejar el scroll vertical libre: nada se mueve solo mientras el cliente scrollea.
 - **Do** usar el contorno dorado de 2px como foco en todo elemento interactivo.
 
 ### Don't:
