@@ -9,7 +9,8 @@ import type { Category, Extra, Hero, OrderStep, Product } from "@/lib/order/type
  */
 
 export const categories: Category[] = [
-  { id: "burgers", name: "Burgers", icon: "burger", description: "Todas vienen con porción de papas." },
+  { id: "promos", name: "Promos", icon: "promo" },
+  { id: "burgers", name: "Burgers", icon: "burger", description: "Todas vienen con porción de papas.", badge: "Con papas" },
   { id: "de-la-casa", name: "De la casa", icon: "flame", description: "Las firmas de El Bocadillo. Para valientes." },
   { id: "sandwiches", name: "Sándwiches", icon: "sandwich" },
   { id: "acompanamientos", name: "Papas y nuggets", icon: "fries" },
@@ -46,11 +47,8 @@ export const papasExtras: Extra[] = [
   { id: "milanesa", label: "Milanesa", price: 3500 },
 ];
 
-/**
- * Destacado del hero. Cuando el local confirme una promo, cargala como
- * producto y apuntá el hero a ella.
- */
-export const hero: Hero = { productId: "big-beicon", headline: "¡No te quedes con las ganas!" };
+/** Destacado del hero: la promo vigente (piezas de Instagram, spec 004). */
+export const hero: Hero = { productId: "promo-2-cheese", headline: "¡No te quedes con las ganas!" };
 
 /**
  * Pasos del pedido, como el kiosco de McDonald's (spec 005). Antes va
@@ -58,12 +56,33 @@ export const hero: Hero = { productId: "big-beicon", headline: "¡No te quedes c
  * la categoría y un paso acá.
  */
 export const steps: OrderStep[] = [
-  { id: "comida", title: "Elegí tu comida", short: "Comida", categoryIds: ["burgers", "de-la-casa", "sandwiches", "pizzas"] },
-  { id: "acompanar", title: "¿Algo para acompañar?", short: "Acompañar", categoryIds: ["acompanamientos"] },
+  // Sin paso de acompañamiento: las burgers ya traen papas (spec 005, R9).
+  {
+    id: "comida",
+    title: "Elegí tu comida",
+    short: "Comida",
+    categoryIds: ["promos", "burgers", "de-la-casa", "sandwiches", "acompanamientos", "pizzas"],
+  },
   { id: "bebidas", title: "¿Y para tomar?", short: "Bebidas", categoryIds: ["bebidas", "tragos", "con-alcohol"] },
 ];
 
 export const products: Product[] = [
+  // Promos (piezas de Instagram del local, noviembre 2026)
+  {
+    id: "promo-2-cheese",
+    categoryId: "promos",
+    name: "2 Cheeseburger doble + papas",
+    description: "Cada cheeseburger lleva doble medallón y cheddar.",
+    price: 20000,
+  },
+  {
+    id: "promo-4-cheese",
+    categoryId: "promos",
+    name: "4 Cheeseburger doble + papas",
+    description: "Cada cheeseburger lleva doble medallón y cheddar.",
+    price: 35000,
+  },
+
   // Burgers
   {
     id: "cheeseburger",

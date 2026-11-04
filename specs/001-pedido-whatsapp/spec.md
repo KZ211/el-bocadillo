@@ -129,7 +129,7 @@ Archivos: `src/data/menu.ts`, `src/data/store.ts` (local), `src/lib/order/*` (pr
 
 - Nuggets + papas: el catálogo dice $12.000 y el menú $13.000 (se usa $13.000).
 - Quíntuples: el catálogo tiene "Menú quíntuples $17.000"; la pieza muestra Big Beacon $18.200 y Xtrema $21.200 (se usan estos).
-- ¿Sigue vigente la promo "2 cheeseburger doble + papas $20.000"? (no se cargó).
+- ~~¿Sigue vigente la promo "2 cheeseburger doble + papas $20.000"?~~ Sí: la confirmó el local y se cargó en la spec 004, junto con la de 4 por $35.000.
 - Odisea, Kratos y Tóxica aparecen en un menú anterior de Instagram pero no en el catálogo actual (no se cargaron).
 - Descripción exacta de la Pizza Chancha y si las pizzas llevan agregados.
 - Logo y fotos como archivos (ver spec 002).

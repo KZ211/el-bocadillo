@@ -1,4 +1,4 @@
-import { Beer, CupSoda, Flame, Hamburger, Martini, Pizza, Sandwich, Utensils } from "lucide-react";
+import { BadgePercent, Beer, CupSoda, Flame, Hamburger, Martini, Pizza, Sandwich, Utensils } from "lucide-react";
 import type { ComponentType } from "react";
 import type { CategoryIcon } from "@/lib/order/types";
 import { FriesIcon } from "./icons";
@@ -6,6 +6,7 @@ import { FriesIcon } from "./icons";
 type Icon = ComponentType<{ className?: string; strokeWidth?: number }>;
 
 export const categoryIcons: Record<CategoryIcon, Icon> = {
+  promo: BadgePercent,
   burger: Hamburger,
   flame: Flame,
   sandwich: Sandwich,

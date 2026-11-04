@@ -60,9 +60,9 @@
     "semantic_hash": ""
   },
   "src/components/order-app.tsx": {
-    "mtime": 1793749874.0779612,
-    "seen": 1793750053.386582,
-    "ast_hash": "08d55d60e101d51606b60bb21d0890d4",
+    "mtime": 1793751177.3354976,
+    "seen": 1793751265.497163,
+    "ast_hash": "80a94ba6a2fde3d119175f29d2ad4d87",
     "semantic_hash": ""
   },
   "src/components/printer-mouth.tsx": {
@@ -90,9 +90,9 @@
     "semantic_hash": "359176de495d91a4e9367e192f31c5e8"
   },
   "src/data/menu.ts": {
-    "mtime": 1793749579.9359922,
-    "seen": 1793750053.3866072,
-    "ast_hash": "516276648866833479ce634caf58d532",
+    "mtime": 1793751223.1191514,
+    "seen": 1793751265.497215,
+    "ast_hash": "c5ad25250ad89950523bd60fb728f578",
     "semantic_hash": ""
   },
   "src/data/store.ts": {
@@ -126,9 +126,9 @@
     "semantic_hash": "04fc00189fbfa5e1a8b7df82d96712cb"
   },
   "src/lib/order/types.ts": {
-    "mtime": 1793749579.9376183,
-    "seen": 1793750053.386662,
-    "ast_hash": "87eadb1ffb47117462e1b2b41d9f77a2",
+    "mtime": 1793751132.762867,
+    "seen": 1793751265.497278,
+    "ast_hash": "7263c20414e419f09694dce4bf776cbc",
     "semantic_hash": ""
   },
   "src/lib/order/validate.ts": {
@@ -150,9 +150,9 @@
     "semantic_hash": "b5b57503899e026e3667c83f00e4e4a0"
   },
   ".impeccable/surfaces/src-app-page-tsx.md": {
-    "mtime": 1793750021.3473034,
-    "seen": 1793750053.3866801,
-    "ast_hash": "65b0c7974df9d3a0b25fa3b0f6bc4ba2",
+    "mtime": 1793750951.5522091,
+    "seen": 1793751265.49731,
+    "ast_hash": "fc5e8debbf69755258d1d36f6d9c7afb",
     "semantic_hash": ""
   },
   "AGENTS.md": {
@@ -168,9 +168,9 @@
     "semantic_hash": "317bb4ee54370a83e92b3600fe43d371"
   },
   "DESIGN.md": {
-    "mtime": 1793750030.211764,
-    "seen": 1793750053.386692,
-    "ast_hash": "36b6d654b70cbfc3d5951776fdd45382",
+    "mtime": 1793751065.3481886,
+    "seen": 1793751265.497333,
+    "ast_hash": "04053a91046b70b78f16c48cd866d50d",
     "semantic_hash": ""
   },
   "PRODUCT.md": {
@@ -186,10 +186,10 @@
     "semantic_hash": "87e278c057df706d285b0378af19b23c"
   },
   "specs/001-pedido-whatsapp/spec.md": {
-    "mtime": 1793247822.3632803,
-    "seen": 1793248195.8834162,
-    "ast_hash": "656c0aa4cacd65cbd5a923586e9c2d3d",
-    "semantic_hash": "656c0aa4cacd65cbd5a923586e9c2d3d"
+    "mtime": 1793751132.7670631,
+    "seen": 1793751265.4973571,
+    "ast_hash": "0e8754ab0401acdb42800c8b0dac7412",
+    "semantic_hash": ""
   },
   "specs/002-fotos-y-logo.md": {
     "mtime": 1793747522.1988754,
@@ -216,21 +216,21 @@
     "semantic_hash": "9627fda2a6224f7adfbda2e5b36dcc35"
   },
   "src/components/product-art.tsx": {
-    "mtime": 1793749599.0646307,
-    "seen": 1793750053.386591,
-    "ast_hash": "96420369f835d0b2199be66827cf0ad4",
+    "mtime": 1793751132.764151,
+    "seen": 1793751265.497183,
+    "ast_hash": "589be3569bc445206bfce9b34874f9d3",
     "semantic_hash": ""
   },
   "specs/003-redesign-cadenas/spec.md": {
-    "mtime": 1793749565.717559,
-    "seen": 1793750053.386713,
-    "ast_hash": "dd615bee897c4c0abeae72646d203793",
+    "mtime": 1793751132.7688637,
+    "seen": 1793751265.497428,
+    "ast_hash": "906c77ea793be8f8827d9d6846679752",
     "semantic_hash": ""
   },
   "specs/004-menu-real/spec.md": {
-    "mtime": 1793749565.719036,
-    "seen": 1793750053.386716,
-    "ast_hash": "db213bc80c20f89298ebc8450a78b2bd",
+    "mtime": 1793751132.7651167,
+    "seen": 1793751265.497439,
+    "ast_hash": "9a2845d90c2629b4216c3532a026c915",
     "semantic_hash": ""
   },
   "public/menu/big-beicon.jpg": {
@@ -270,9 +270,9 @@
     "semantic_hash": ""
   },
   "src/lib/order/steps.test.ts": {
-    "mtime": 1793749620.7714763,
-    "seen": 1793750053.386654,
-    "ast_hash": "eda0c14884764bd56b7529da6b23f2ae",
+    "mtime": 1793750871.3641725,
+    "seen": 1793751265.497262,
+    "ast_hash": "3812b4a2d6bd1c511b661f5ef7b9caf0",
     "semantic_hash": ""
   },
   "src/lib/order/steps.ts": {
@@ -282,9 +282,21 @@
     "semantic_hash": ""
   },
   "specs/005-pedido-por-pasos/spec.md": {
-    "mtime": 1793749874.078793,
-    "seen": 1793750053.38672,
-    "ast_hash": "e69a4db242e258ee20464bede19a55c4",
+    "mtime": 1793751065.3472674,
+    "seen": 1793751265.497449,
+    "ast_hash": "a6e481ec5fe34ec931868acfdd51968a",
+    "semantic_hash": ""
+  },
+  "public/menu/promo-2-cheese.jpg": {
+    "mtime": 1793751099.691887,
+    "seen": 1793751265.497531,
+    "ast_hash": "d1f461cd5240900fe5ee4905c4758245",
+    "semantic_hash": ""
+  },
+  "public/menu/promo-4-cheese.jpg": {
+    "mtime": 1793751114.040041,
+    "seen": 1793751265.497536,
+    "ast_hash": "519bedd61e087abe581210bce50cda65",
     "semantic_hash": ""
   },
   "pnpm-lock.yaml": {

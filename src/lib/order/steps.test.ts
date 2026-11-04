@@ -16,7 +16,7 @@ const line = (productId: string, qty = 1): CartLine => ({
 
 describe("pasos del pedido", () => {
   it("arranca preguntando cómo lo querés y termina en el pedido", () => {
-    expect(screenOrder(steps)).toEqual(["modo", "comida", "acompanar", "bebidas", "pedido"]);
+    expect(screenOrder(steps)).toEqual(["modo", "comida", "bebidas", "pedido"]);
   });
 
   it("avanza de a un paso y no hay siguiente después del pedido", () => {
@@ -35,14 +35,14 @@ describe("pasos del pedido", () => {
     const comida = productsForStep(step("comida"), products).map((p) => p.id);
     expect(comida).toContain("big-beicon");
     expect(comida).not.toContain("odisea"); // sin precio todavía
-    expect(comida).not.toContain("caja-papas");
-    expect(productsForStep(step("acompanar"), products).map((p) => p.id)).toContain("caja-papas");
+    expect(comida).toContain("caja-papas"); // las papas son parte de la comida
+    expect(productsForStep(step("bebidas"), products).map((p) => p.id)).not.toContain("caja-papas");
   });
 
   it("cuenta las unidades del pedido que son de cada paso", () => {
-    const lines = [line("big-beicon", 2), line("coca-175")];
-    expect(countInStep(step("comida"), lines, get)).toBe(2);
-    expect(countInStep(step("acompanar"), lines, get)).toBe(0);
-    expect(countInStep(step("bebidas"), lines, get)).toBe(1);
+    const lines = [line("big-beicon", 2), line("nuggets")];
+    expect(countInStep(step("comida"), lines, get)).toBe(3);
+    expect(countInStep(step("bebidas"), lines, get)).toBe(0);
+    expect(countInStep(step("bebidas"), [...lines, line("coca-175")], get)).toBe(1);
   });
 });

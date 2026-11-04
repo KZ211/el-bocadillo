@@ -8,6 +8,7 @@ import { formatMoney, fromPrice, subtotal } from "@/lib/order/pricing";
 import { countInStep, nextScreen, productsForStep, type Screen } from "@/lib/order/steps";
 import type { CartLine, Category, DeliveryMode, Hero, OrderStep, Product } from "@/lib/order/types";
 import { ComandaPanel, TicketPreview } from "./comanda-panel";
+import { FriesIcon } from "./icons";
 import { ModeStep } from "./mode-step";
 import { categoryIcons, ProductArt } from "./product-art";
 import { ProductSheet } from "./product-sheet";
@@ -28,6 +29,7 @@ export function OrderApp({ categories, products, hero, steps, logo }: Props) {
   const byId = useMemo(() => new Map(products.map((p) => [p.id, p])), [products]);
   const getProduct = useCallback((id: string) => byId.get(id), [byId]);
   const iconOf = useMemo(() => new Map(categories.map((c) => [c.id, c.icon])), [categories]);
+  const badgeOf = useMemo(() => new Map(categories.map((c) => [c.id, c.badge])), [categories]);
 
   const { lines, checkout, savedMode } = useOrder();
   const [selected, setSelected] = useState<Product | null>(null);
@@ -47,7 +49,7 @@ export function OrderApp({ categories, products, hero, steps, logo }: Props) {
   };
 
   const qtyByProduct = useMemo(() => countByProduct(lines), [lines]);
-  const card = { iconOf, qtyByProduct, onOpen: openProduct, onAdd: add };
+  const card = { iconOf, badgeOf, qtyByProduct, onOpen: openProduct, onAdd: add };
 
   const step = steps.find((s) => s.id === screen);
   const next = nextScreen(steps, screen);
@@ -100,7 +102,8 @@ export function OrderApp({ categories, products, hero, steps, logo }: Props) {
         {step ? (
           <StepBar
             getProduct={getProduct}
-            label={declining ? "No, gracias" : `Siguiente: ${nextLabel}`}
+            label={declining ? "No, gracias" : "Siguiente"}
+            destination={nextLabel ?? ""}
             onNext={() => next && go(next)}
             onReview={() => go("pedido")}
           />
@@ -291,11 +294,14 @@ function MenuStep({
 function StepBar({
   getProduct,
   label,
+  destination,
   onNext,
   onReview,
 }: {
   getProduct: (id: string) => Product | undefined;
   label: string;
+  /** A dónde lleva, en una segunda línea: entra al lado del total aun en 360px. */
+  destination: string;
   onNext: () => void;
   onReview: () => void;
 }) {
@@ -322,9 +328,13 @@ function StepBar({
         <button
           type="button"
           onClick={onNext}
-          className="flex min-h-14 min-w-0 flex-1 items-center justify-center gap-2 rounded-full bg-gold px-5 text-lg font-semibold text-on-gold shadow-[0_10px_28px_rgb(0_0_0/0.55)] transition hover:bg-gold-strong active:scale-[0.98]"
+          aria-label={`${label}: ${destination}`}
+          className="flex min-h-14 min-w-0 flex-1 items-center justify-center gap-3 rounded-full bg-gold px-5 text-on-gold shadow-[0_10px_28px_rgb(0_0_0/0.55)] transition hover:bg-gold-strong active:scale-[0.98]"
         >
-          <span className="truncate">{label}</span>
+          <span className="flex min-w-0 flex-col items-start leading-tight">
+            <span className="truncate text-lg font-semibold">{label}</span>
+            <span className="truncate text-xs font-medium text-on-gold/70">{destination}</span>
+          </span>
           <ChevronRight className="size-5 shrink-0" aria-hidden />
         </button>
       </div>
@@ -445,7 +455,7 @@ function HeroCard({
           <button
             type="button"
             onClick={() => onAdd(product)}
-            aria-label={`Pedir la ${product.name}, ${formatMoney(fromPrice(product))}`}
+            aria-label={`Pedir ${product.name}, ${formatMoney(fromPrice(product))}`}
             className="mt-4 flex min-h-12 items-center justify-between gap-4 self-start rounded-full bg-gold pr-2 pl-5 font-semibold text-on-gold transition hover:bg-gold-strong active:scale-[0.98]"
           >
             <span>Pedila</span>
@@ -462,10 +472,16 @@ function CategoryNav({ categories }: { categories: Category[] }) {
   const navRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
+    // Secciones dentro de la franja: la activa es la primera en el orden del menú.
+    const inView = new Set<string>();
     const observer = new IntersectionObserver(
       (entries) => {
-        const visible = entries.filter((e) => e.isIntersecting);
-        if (visible.length) setActive(visible[0].target.id);
+        for (const e of entries) {
+          if (e.isIntersecting) inView.add(e.target.id);
+          else inView.delete(e.target.id);
+        }
+        const first = categories.find((c) => inView.has(c.id));
+        if (first) setActive(first.id);
       },
       { rootMargin: "-170px 0px -55% 0px" },
     );
@@ -512,6 +528,8 @@ function CategoryNav({ categories }: { categories: Category[] }) {
 
 type CardProps = {
   iconOf: Map<string, Category["icon"]>;
+  /** Etiqueta por categoría ("Con papas" en las burgers). */
+  badgeOf: Map<string, string | undefined>;
   qtyByProduct: Map<string, number>;
   onOpen: (product: Product) => void;
   onAdd: (product: Product) => void;
@@ -607,6 +625,7 @@ function ProductCard({
   product,
   wide,
   iconOf,
+  badgeOf,
   qtyByProduct,
   onOpen,
   onAdd,
@@ -632,6 +651,12 @@ function ProductCard({
           {product.variants?.length ? <span className="text-sm font-normal text-muted">desde </span> : null}
           {formatMoney(fromPrice(product))}
         </span>
+        {badgeOf.get(product.categoryId) ? (
+          <span className="mt-1.5 inline-flex items-center gap-1 text-sm text-muted">
+            <FriesIcon className="size-4 text-gold" strokeWidth={1.75} />
+            {badgeOf.get(product.categoryId)}
+          </span>
+        ) : null}
       </button>
 
       {qty ? (

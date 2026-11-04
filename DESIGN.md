@@ -256,13 +256,13 @@ Una noche cálida de tres escalones con un dorado de marca y un papel térmico c
 
 Mobile-first en una columna de hasta 48rem centrada, con margen lateral de 16px (24px desde 640px). Las categorías arrancan con 40px de aire arriba; las filas del menú son renglones de pizarra separados por una línea `edge`, con 20px de aire vertical; los formularios respiran a 28px entre grupos y 16px dentro de un grupo.
 
-El pedido es un flujo por pantallas, como el kiosco de McDonald's (spec 005): "¿Cómo lo querés?", los pasos del menú (Comida, Acompañar, Bebidas, definidos en `steps` de `src/data/menu.ts`) y "Tu pedido". Cada pantalla es una entrada del historial, así que el botón atrás del celular vuelve al paso anterior.
+El pedido es un flujo por pantallas, como el kiosco de McDonald's (spec 005): "¿Cómo lo querés?", los pasos del menú (Comida y Bebidas, definidos en `steps` de `src/data/menu.ts`; no hay paso de acompañamiento porque las burgers ya traen papas) y "Tu pedido". Cada pantalla es una entrada del historial, así que el botón atrás del celular vuelve al paso anterior.
 
 - **"¿Cómo lo querés?":** encabezado completo (nombre, dirección y estado, con el aviso de cerrado) y tres opciones grandes.
 - **Pasos del menú:** encabezado compacto en una línea, barra de pasos fija y título del paso en Gloock a 2.4rem. En Comida van además el hero y "Recomendadas" (carrusel con snap, tarjetas al 72% del ancho). Después, una sección por categoría con grilla de tarjetas: 2 columnas en mobile, 3 desde 768px y 4 desde 1280px, con 12px entre columnas y 28px entre filas. La columna del menú llega hasta 64rem.
 - **"Tu pedido":** una columna de 36rem con la comanda, los datos y "Enviar pedido" pegajoso al pie.
 
-La barra de pasos (con las chips de categoría del paso debajo, si tiene más de una) es fija arriba sobre el suelo al 95% con desenfoque; `scroll-padding-top` es de 10rem para que las secciones no queden tapadas. En cada paso del menú, la barra inferior es fija al pie (margen de 12px, respeta `safe-area-inset-bottom`, con un velo de suelo detrás) y el contenido reserva 9rem al pie.
+La barra de pasos (con las chips de categoría del paso debajo, si tiene más de una) es fija arriba sobre el suelo al 95% con desenfoque; `scroll-padding-top` es de 11.5rem para que las secciones no queden tapadas. En cada paso del menú, la barra inferior es fija al pie (margen de 12px, respeta `safe-area-inset-bottom`, con un velo de suelo detrás) y el contenido reserva 9rem al pie.
 
 Desde 1024px, los pasos del menú pasan a dos columnas: el paso a la izquierda (con la barra inferior pegajosa al pie de la columna) y la comanda en vivo en un aside fijo de alto completo (26rem, 28rem desde 1280px) sobre surface. En "¿Cómo lo querés?" y "Tu pedido" no hay aside: la comanda está en la pantalla principal.
 
@@ -306,6 +306,7 @@ Táctiles y seguros, siempre en píldora.
 
 ### Cards / Containers
 - **Tarjeta de producto:** foto cuadrada (4:3 en "Recomendadas") con 16px de radio; debajo, el nombre en Card title y el precio dorado tabular ("desde" en gris si hay tamaños). Foto, nombre y precio son un solo botón que abre la hoja del producto; al presionar, la foto se achica a 0.98.
+- **Etiqueta de categoría:** debajo del precio, en 0.875rem gris con el ícono de papas en dorado (trazo 1.75), cuando la categoría tiene `badge`. Hoy: "Con papas" en Burgers.
 - **"+" de la tarjeta:** círculo dorado de 44px con "+" en tinta, a 8px de la esquina inferior derecha de la foto (posicionado con `cqw`). Si el producto no tiene tamaños, agrega directo (agregado rápido de las cadenas) y hace un pop; si tiene, abre la hoja.
 - **Contador en la tarjeta:** píldora de 28px arriba a la izquierda de la foto, noche al 85% con desenfoque, check y cantidad en dorado. Es la confirmación del agregado rápido; no es un badge rojo.
 - **Mármol (placeholder de foto):** superficie con dos brillos radiales cálidos, tres vetas doradas en SVG (1.5px al 55% y 0.75px al 30%) que salen del id del producto, y el ícono lucide de la categoría en dorado al 85% con trazo 1.25.
@@ -328,7 +329,7 @@ Táctiles y seguros, siempre en píldora.
 - **Chips de categoría:** solo las del paso, en píldora (ícono y nombre), con scroll horizontal. El chip activo sigue a la sección visible. Son botones y no anclas, así no ensucian el historial.
 
 ### Barra del paso
-Al pie de cada paso del menú. A la izquierda, si hay ítems, una píldora raised de 56px con la cantidad en un círculo dorado y el total; tocarla lleva a "Tu pedido" y con cada cambio rebota 8px. A la derecha, la acción dorada de 56px "Siguiente: <paso>" con chevron. En los pasos de complementos, si no se agregó nada de ese paso, dice "No, gracias".
+Al pie de cada paso del menú. A la izquierda, si hay ítems, una píldora raised de 56px con la cantidad en un círculo dorado y el total; tocarla lleva a "Tu pedido" y con cada cambio rebota 8px. A la derecha, la acción dorada de 56px con "Siguiente" en Label a 1.125rem, el destino debajo en 0.75rem (tinta al 70%) y un chevron. Las dos líneas hacen que entre al lado del total aun en 360px. Después del primer paso (hoy, Bebidas), si no se agregó nada de ese paso, dice "No, gracias".
 
 ### Hojas
 `dialog` nativo sobre surface con título en Gloock a 1.5rem y botón de cerrar circular. La hoja de producto abre con la foto (o el mármol) a sangre en 4:3 (16:10 desde 768px), el botón de cerrar flotando sobre ella en un círculo de noche al 70%, y el nombre debajo en Gloock a 2rem. Entran desde abajo en 380ms con `cubic-bezier(0.16, 1, 0.3, 1)`; el velo aparece en 300ms. Con movimiento reducido todas las transiciones duran 1ms.

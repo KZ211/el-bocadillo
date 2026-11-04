@@ -11,7 +11,7 @@ Mode: Operate. Audience: clientes de El Bocadillo que llegan desde WhatsApp, en 
 
 ## Direction contract
 
-THESIS: Flujo de pedido del kiosco de McDonald's vestido de El Bocadillo (specs 003 y 005): "¿Cómo lo querés?" (Delivery en moto, Paso a retirar, Para consumir en el local), después Comida, Acompañar y Bebidas, cada uno salteable con "No, gracias", y al final "Tu pedido" con la comanda térmica como vista previa exacta del mensaje de WhatsApp. Se toma la estructura de las cadenas, no su identidad.
+THESIS: Flujo de pedido del kiosco de McDonald's vestido de El Bocadillo (specs 003 y 005): "¿Cómo lo querés?" (Delivery en moto, Paso a retirar, Para consumir en el local), después Comida (las burgers marcan "Con papas", sin paso de acompañamiento) y Bebidas, salteable con "No, gracias", y al final "Tu pedido" con la comanda térmica como vista previa exacta del mensaje de WhatsApp. Se toma la estructura de las cadenas, no su identidad.
 
 OWN-WORLD: Noche de local: negro cálido (#0d0c0a) como suelo, superficies un paso más claras, dorado de marca (#d6a842) solo en marca, precios destacados y acción principal. Papel térmico crema-blanco (#f6f3ea) con borde dentado y tinta negra para el ticket. Display serif de alto contraste (Gloock) para la marca y nombres de burgers; Archivo para UI; mono de ticket solo dentro del ticket (es dato real). Esquinas rectas en papel, 10px en controles.
 

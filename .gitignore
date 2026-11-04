@@ -53,3 +53,4 @@ graphify-out/.graphify_*
 
 # originales de las cartas (HEIC, pesados); ver specs/004-menu-real
 docs/menus/*.HEIC
+docs/menus/*.PNG

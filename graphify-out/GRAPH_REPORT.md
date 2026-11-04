@@ -1,17 +1,17 @@
 # Graph Report - el-bocadillo  (2026-11-03)
 
 ## Corpus Check
-- 43 files · ~21,469 words
+- 43 files · ~21,937 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 4 file(s) not represented in the graph (top: (none) 2, .ico 1, .css 1)
 
 ## Summary
-- 326 nodes · 664 edges · 13 communities (12 shown, 1 thin omitted)
+- 326 nodes · 667 edges · 13 communities (12 shown, 1 thin omitted)
 - Extraction: 91% EXTRACTED · 9% INFERRED · 0% AMBIGUOUS · INFERRED: 61 edges (avg confidence: 0.85)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `a27ec100`
+- Built from commit: `981eac89`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -73,16 +73,16 @@ Cohesion: 0.07
 Nodes (31): eslintConfig, devDependencies, eslint@^9, eslint-config-next@16.4.3, tailwindcss@^4, @tailwindcss/turbopack@^4, @types/node@^20, @types/react@^19 (+23 more)
 
 ### Community 2 - "comanda-panel.tsx"
-Cohesion: 0.09
-Nodes (44): ComandaPanel(), Props, Sent, SentState(), WhatsAppIcon(), PrinterMouth(), Configurator(), LineControls() (+36 more)
+Cohesion: 0.12
+Nodes (34): ComandaPanel(), Props, Sent, SentState(), WhatsAppIcon(), PrinterMouth(), Configurator(), LineControls() (+26 more)
 
 ### Community 3 - "order-app.tsx"
-Cohesion: 0.11
-Nodes (34): TicketPreview(), FriesIcon(), ModeStep(), options, Props, CardProps, CategoryNav(), countByProduct() (+26 more)
+Cohesion: 0.13
+Nodes (31): TicketPreview(), FriesIcon(), ModeStep(), CardProps, CategoryNav(), countByProduct(), HeroCard(), isQuickAdd() (+23 more)
 
 ### Community 4 - "product-sheet.tsx"
-Cohesion: 0.12
-Nodes (20): dependencies, lucide-react@^1.63.0, react@19.3.0, react-dom@19.3.0, lucide-react, react, react-dom, CheckoutForm() (+12 more)
+Cohesion: 0.08
+Nodes (33): dependencies, lucide-react@^1.63.0, react@19.3.0, react-dom@19.3.0, lucide-react, react, react-dom, CheckoutForm() (+25 more)
 
 ### Community 5 - "menu.ts"
 Cohesion: 0.12

@@ -37,7 +37,7 @@ McDonald's y Burger King llevan años puliendo el pedido de comida rápida en el
 ## Requisitos
 - R1: El menú se ve primero como fotos/tarjetas grandes; 2 columnas en mobile (360–414px), 3–4 en desktop.
 - R2: Sin foto, la tarjeta muestra un placeholder de marca coherente (no un hueco gris).
-- R3: El hero muestra el destacado definido en `src/data/menu.ts` (`hero`), no hardcodeado en el componente. La promo "2 cheeseburger doble + papas" no se carga hasta que el local la confirme (pregunta abierta de la spec 001).
+- R3: El hero muestra el destacado definido en `src/data/menu.ts` (`hero`), no hardcodeado en el componente. Desde la spec 004, el hero destaca la promo confirmada de 2 Cheeseburger doble + papas.
 - R4: "Recomendadas" sale de un flag `featured` en los productos. No se usa "las más pedidas" porque no hay datos de ventas.
 - R5: La hoja de producto tiene el primer tamaño preseleccionado y un CTA fijo "Agregar · $total" que se actualiza en vivo.
 - R6: Los productos sin variantes ni opciones obligatorias se agregan con "+" desde la tarjeta, con feedback visible sin abrir hojas.

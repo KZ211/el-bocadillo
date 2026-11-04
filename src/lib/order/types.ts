@@ -1,4 +1,4 @@
-export type CategoryIcon = "burger" | "flame" | "sandwich" | "fries" | "pizza" | "soda" | "cocktail" | "beer";
+export type CategoryIcon = "promo" | "burger" | "flame" | "sandwich" | "fries" | "pizza" | "soda" | "cocktail" | "beer";
 
 export type Category = {
   id: string;
@@ -7,6 +7,8 @@ export type Category = {
   icon?: CategoryIcon;
   /** Con alcohol: aviso +18 y fuera de "¿Le sumás algo?". */
   adults?: boolean;
+  /** Etiqueta en las tarjetas de la categoría (ej. "Con papas"). */
+  badge?: string;
   /** "list": renglones compactos para listas largas sin fotos (bebidas). Por defecto, grilla de tarjetas. */
   layout?: "grid" | "list";
   /** Reservado para navegación jerárquica (subcategorías). */

@@ -13,6 +13,7 @@ El dueño pasó fotos de las cartas impresas del local (originales en `docs/menu
 | `IMG_4770` | Tragos en jarra |
 | `IMG_4771` | Bebidas: con alcohol, combos y sin alcohol |
 | `IMG_4772`, `IMG_4773` | Menú Bocadillos (dos fotos de la misma carta) |
+| `IMG_4812`, `IMG_4813` | Piezas de Instagram: promo 4 Cheeseburger doble + papas $35.000 y promo 2 Cheeseburger doble + papas $20.000 |
 
 Los precios del Menú Burger y del Menú Bocadillos coinciden con `src/data/menu.ts`. Faltaban las bebidas, los tragos y tres burgers de la casa.
 
@@ -21,6 +22,7 @@ Los precios del Menú Burger y del Menú Bocadillos coinciden con `src/data/menu
 - Categoría **Bebidas** (sin alcohol).
 - Categorías **Tragos en jarra** y **Latas y combos** (con alcohol), marcadas `adults`: muestran "Solo para mayores de 18" y nunca aparecen en "¿Le sumás algo?".
 - La categoría "Quíntuples" pasa a **De la casa**, con las cinco burgers de la carta de firmas.
+- Categoría **Promos** al principio de Comida (como las "Ofertas" de las cadenas): 2 Cheeseburger doble + papas ($20.000) y 4 Cheeseburger doble + papas ($35.000), con fotos recortadas de las piezas. La de $20.000 es el destacado del hero; con esto queda resuelta la pregunta abierta de la spec 001.
 - Fotos de Extrema, Big Beicon 5X, Odisea, Kratos y Tóxica recortadas de la carta impresa, en `public/menu/<id>.jpg`.
 
 ### No incluye
@@ -41,7 +43,7 @@ Los precios del Menú Burger y del Menú Bocadillos coinciden con `src/data/menu
 
 ## Modelo de datos
 - `Category.adults?: boolean`: aviso +18 y fuera de las sugerencias.
-- `CategoryIcon` suma `soda`, `beer` y `cocktail`.
+- `CategoryIcon` suma `soda`, `beer`, `cocktail` y `promo`.
 - `Category.layout?: "grid" | "list"`: las listas largas sin fotos (bebidas) van en renglones compactos.
 - `Product.notePrompt?: string`: pregunta obligatoria (por ejemplo, "¿Qué gusto?"); el "+" abre la hoja en vez de agregar directo.
 - ~~`complements`~~: se quitó en la spec 005.
