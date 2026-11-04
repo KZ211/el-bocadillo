@@ -14,6 +14,9 @@ Este proyecto se trabaja con **Spec Driven Development**: ninguna funcionalidad 
 | Nº | Spec | Estado |
 |----|------|--------|
 | 001 | [Pedido por WhatsApp](./001-pedido-whatsapp/spec.md) | implementada (v1) |
-| 002 | [Fotos y logo](./002-fotos-y-logo.md) | borrador |
+| 002 | [Fotos y logo](./002-fotos-y-logo.md) | parcial |
+| 003 | [Redesign basado en las grandes cadenas](./003-redesign-cadenas/spec.md) | implementada |
+| 004 | [Menú real: bebidas, tragos y burgers de la casa](./004-menu-real/spec.md) | implementada (faltan 3 precios) |
+| 005 | [Pedido por pasos](./005-pedido-por-pasos/spec.md) | implementada |
 
 Próximas ideas en [`roadmap.md`](./roadmap.md).

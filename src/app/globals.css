@@ -1,8 +1,10 @@
 @import "tailwindcss";
 
 /*
- * El Bocadillo — comanda térmica.
- * Noche de local (negro cálido), dorado de marca, papel térmico para el ticket.
+ * El Bocadillo — mostrador de comida rápida.
+ * Estructura de las grandes cadenas (tarjetas con foto, barra "Ver pedido"),
+ * con la noche de local (negro cálido), el mármol con vetas doradas y el
+ * papel térmico como vista previa del mensaje de WhatsApp.
  */
 @theme {
   --color-ground: #0d0c0a;
@@ -28,6 +30,29 @@
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --animate-print: print 520ms var(--ease-out-expo) both;
   --animate-feed: feed 420ms var(--ease-out-expo);
+  --animate-pop: pop 360ms var(--ease-out-expo);
+  --animate-rise: rise 420ms var(--ease-out-expo) both;
+
+  @keyframes pop {
+    0% {
+      transform: scale(1);
+    }
+    40% {
+      transform: scale(1.18);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  @keyframes rise {
+    from {
+      transform: translateY(120%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
 
   @keyframes print {
     from {
@@ -67,7 +92,7 @@ html {
   color: var(--color-text);
   color-scheme: dark;
   -webkit-tap-highlight-color: transparent;
-  scroll-padding-top: 5.5rem;
+  scroll-padding-top: 11.5rem; /* barra de pasos + chips de categoría */
 }
 
 html:has(dialog[open]) {
@@ -124,6 +149,21 @@ textarea {
   --tooth: 7px;
   -webkit-mask: conic-gradient(from 135deg at top, #0000, #000 1deg 89deg, #0000 90deg) top / calc(var(--tooth) * 2) 100% repeat-x; /* taste-skill-ignore: máscara */
   mask: conic-gradient(from 135deg at top, #0000, #000 1deg 89deg, #0000 90deg) top / calc(var(--tooth) * 2) 100% repeat-x; /* taste-skill-ignore: máscara */
+}
+
+/* Mármol negro de las piezas de Instagram: placeholder de las fotos.
+   Las vetas doradas las dibuja <ProductArt> en SVG. */
+.marble {
+  background:
+    radial-gradient(120% 90% at 18% 12%, #2a2620 0%, transparent 55%),
+    radial-gradient(90% 80% at 85% 90%, #1f1c17 0%, transparent 60%),
+    var(--color-surface);
+}
+
+/* Foto del hero fundida con el mármol: los bordes se desvanecen en vez de cortar. */
+.fade-edges {
+  -webkit-mask-image: radial-gradient(closest-side, #000 55%, transparent 100%);
+  mask-image: radial-gradient(closest-side, #000 55%, transparent 100%);
 }
 
 /* Hojas (dialog nativo): suben desde abajo en mobile. */

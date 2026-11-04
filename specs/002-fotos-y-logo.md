@@ -1,6 +1,6 @@
 # 002 — Fotos de productos y logo
 
-- **Estado:** borrador (esperando archivos)
+- **Estado:** parcial: Extrema, Big Beicon 5X, Odisea, Kratos y Tóxica tienen fotos recortadas de la carta impresa (spec 004). Faltan el logo y las fotos del resto.
 
 ## Contexto
 La página ya detecta imágenes por convención de nombre. Faltan los archivos.
